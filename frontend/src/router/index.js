@@ -4,6 +4,7 @@ import Router from 'vue-router'
 import index from '@/components/index'
 import deviceCatalog from '@/components/catalog'
 import deviceCatalog2 from '@/components/catalog2'
+import general from '@/components/forms/general'
 
 Vue.use(Router)
 
@@ -19,6 +20,9 @@ export default new Router({
       }, {
         path: '/deviceCatalog2',
         component: deviceCatalog2
+      }, {
+        path: '/general',
+        component: general
       }]
     }
   ]
