@@ -1,3 +1,5 @@
 <template>
-  <h1>hello,page1</h1>
+	<section class="content">
+  		<h1>hello,page1 37</h1>
+  	</section>
 </template>

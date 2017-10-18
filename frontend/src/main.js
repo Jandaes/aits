@@ -3,15 +3,25 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-// bootstrap
+// Bootstrap 3.3.6
 import '../bootstrap/css/bootstrap.css'
-import '../bootstrap/js/bootstrap.min'
+import '../bootstrap/js/bootstrap.min.js'
 // adminlte
-import '../assets/css/AdminLTE.min.css'
-import '../assets/css/skins/_all-skins.min.css'
-import '../assets/js/app.min'
+import '../assets/css/AdminLTE.css'
+import '../assets/css/skins/_all-skins.css'
 // font-awesome
-import 'font-awesome/css/font-awesome.min.css'
+// import 'font-awesome/css/font-awesome.min.css'
+
+// jquery
+import '../plugins/jQuery/jquery-2.2.3.min.js'
+// SlimScroll
+import '../plugins/slimScroll/jquery.slimscroll.min.js'
+// FastClick
+import '../plugins/fastclick/fastclick.js'
+// AdminLTE App
+import '../assets/js/app.min.js'
+// AdminLTE for demo purposes
+import '../assets/js/demo.js'
 
 Vue.config.productionTip = false
 
