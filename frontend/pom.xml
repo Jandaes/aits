@@ -20,18 +20,18 @@
 
         <executions>
           <!-- Install our node and npm version to run npm/node scripts-->
-          <!--<execution>-->
-            <!--<id>install node and npm</id>-->
-            <!--<goals>-->
-              <!--<goal>install-node-and-npm</goal>-->
-            <!--</goals>-->
-            <!--<configuration>-->
-              <!--<nodeVersion>v8.1.2</nodeVersion>-->
-              <!--<npmVersion>5.4.2</npmVersion>-->
-              <!--&lt;!&ndash;<nodeDownloadRoot>https://npm.taobao.org/mirrors/node/</nodeDownloadRoot>&ndash;&gt;-->
-              <!--&lt;!&ndash;<npmDownloadRoot>http://registry.npmjs.org/npm/</npmDownloadRoot>&ndash;&gt;-->
-            <!--</configuration>-->
-          <!--</execution>-->
+          <execution>
+            <id>install node and npm</id>
+            <goals>
+              <goal>install-node-and-npm</goal>
+            </goals>
+            <configuration>
+              <nodeVersion>v8.1.2</nodeVersion>
+              <npmVersion>5.0.3</npmVersion>
+              <nodeDownloadRoot>https://npm.taobao.org/mirrors/node/</nodeDownloadRoot>
+              <!--<npmDownloadRoot>http://registry.npmjs.org/npm/</npmDownloadRoot>-->
+            </configuration>
+          </execution>
 
           <!-- Set NPM Registry -->
           <execution>
