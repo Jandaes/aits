@@ -1,6 +1,7 @@
 # 项目不受版本控制
 aits.iml
 .idea
+minions.iml
 
 
 # 前台不受版本控制文件
@@ -31,4 +32,7 @@ frontend/*.sln
 
 # 后台不受版本控制文件
 backend/backend.iml
+backend/src/main/resources
+backend/src/test
+
 
