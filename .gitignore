@@ -8,9 +8,12 @@ minions.iml
 frontend/node_modules
 frontend/target
 frontend/frontend.iml
+frontend/package.json
+frontend/package-lock.json
 
 frontend/.DS_Store
 frontend/node_modules/
+frontend/node
 frontend/dist/
 frontend/npm-debug.log*
 frontend/yarn-debug.log*
