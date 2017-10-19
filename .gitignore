@@ -1,0 +1,34 @@
+# 项目不受版本控制
+aits.iml
+.idea
+
+
+# 前台不受版本控制文件
+frontend/node_modules
+frontend/target
+frontend/frontend.iml
+
+frontend/.DS_Store
+frontend/node_modules/
+frontend/dist/
+frontend/npm-debug.log*
+frontend/yarn-debug.log*
+frontend/yarn-error.log*
+frontend/test/unit/coverage
+frontend/test/e2e/reports
+frontend/selenium-debug.log
+
+# Editor directories and files
+frontend/.idea
+frontend/.vscode
+frontend/*.suo
+frontend/*.ntvs*
+frontend/*.njsproj
+frontend/*.sln
+
+# 单元测试 、需要再次讨论是否控制
+# frontend/test
+
+# 后台不受版本控制文件
+backend/backend.iml
+
