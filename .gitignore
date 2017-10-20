@@ -35,7 +35,7 @@ frontend/*.sln
 
 # 后台不受版本控制文件
 backend/backend.iml
-backend/src/main/resources
+backend/src/main/resources/publish
 backend/src/test
 
 
