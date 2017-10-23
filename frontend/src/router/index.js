@@ -7,6 +7,7 @@ import deviceCatalog from '@/components/catalog'
 import deviceCatalog2 from '@/components/catalog2'
 import general from '@/components/forms/general'
 import ticketInfo from '@/components/forms/ticketInfo'
+import person from '@/components/forms/person'
 
 // 导入定义路由
 Vue.use(Router)
@@ -28,8 +29,8 @@ export default new Router({
         path: '/general',
         component: general
       }, {
-        path: '/ticketInfo',
-        component: ticketInfo
+        path: '/person',
+        component: person
       }]
     }
   ]

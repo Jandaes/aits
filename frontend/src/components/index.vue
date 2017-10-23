@@ -239,6 +239,14 @@
                   </span>
                 </router-link>
               </li>
+              <li>
+                <router-link to="/person">
+                  <i class="fa fa-th"></i> <span>人啊</span>
+                  <span class="pull-right-container">
+                    <small class="label pull-right bg-green">Hot</small>
+                  </span>
+                </router-link>
+              </li>
               <li class="header">LABELS</li>
               <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
               <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>
