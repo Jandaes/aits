@@ -32,7 +32,7 @@
 									<label>类型:</label>
 									<select name="" id="" v-model="tick.purpose_codes" class="form-control">
 										<option value="ADULT">成人</option>
-										<option value="STUDEND">学生</option>
+										<option value="STUDENT" disabled>学生</option>
 									</select>
 								</div>
 								<button class="btn btn-success" @click="seachTick"><i class="fa fa-search"></i> 走起</button>
@@ -158,7 +158,7 @@ export default{
 	methods: {
     seachTick: function () {
       console.info(this.tick);
-      const url = "http://localhost:8999/ticketInfo/getTicket?train_date="+this.tick.train_date+"&from_station="+this.tick.from_station+"&to_station="+this.tick.to_station+"&purpose_codes="+this.tick.purpose_codes;
+      const url = "http://ee21bdb2.ngrok.io/ticketInfo/getTicket?train_date="+this.tick.train_date+"&from_station="+this.tick.from_station+"&to_station="+this.tick.to_station+"&purpose_codes="+this.tick.purpose_codes;
 		this.$http.get(url,{credientials:false}).then(response => {
 			    // get body data
 			    console.info(response.body);
