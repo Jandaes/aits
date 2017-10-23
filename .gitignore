@@ -37,5 +37,6 @@ frontend/*.sln
 backend/backend.iml
 backend/src/main/resources/public
 backend/src/test
+backend/target/
 
 
