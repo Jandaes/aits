@@ -16,11 +16,29 @@
 	    <section class="content">
 	      <div class="row">
 	        <!-- left column -->
-	        <div class="col-md-6">
+	        <div class="col-md-8">
 	          <!-- general form elements -->
 	          <div class="box box-primary">
 	            <div class="box-header with-border" style="text-align:left">
-	              <h3 class="box-title">列表显示</h3>
+	              <div class="form-inline">
+									<div class="form-group">
+										<label>编号:</label>
+										<input type="text" v-model="person.id" class="form-control">
+									</div>
+									<div class="form-group">
+										<label>姓名:</label>
+										<input type="text" class="form-control" v-model="person.name" placeholder="姓名">
+									</div>
+									<div class="form-group">
+										<label>年龄:</label>
+										<input type="number" class="form-control" v-model="person.age" placeholder="年龄">
+									</div>
+									<div class="form-group">
+										<label>地址:</label>
+										<input type="text" class="form-control" v-model="person.address" placeholder="地址">
+									</div>
+									<button class="btn btn-success" @click="seachPerson"><i class="fa fa-search"></i> 走起</button>
+								</div>
 	            </div>
 	            <!-- /.box-header -->
 	            <!-- form start -->
@@ -37,31 +55,13 @@
 	              			</tr>
 	              		</thead>
 	              		<tbody>
-	              			<tr>
-	              				<td>1</td>
-	              				<td>73</td>
-	              				<td>大佬</td>
-	              				<td>上海</td>
+	              			<tr v-for="person in personList">
+	              				<td>{{ person.id }}</td>
+	              				<td>{{ person.name }}</td>
+	              				<td>{{ person.age }}</td>
+	              				<td>{{ person.address }}</td>
 	              				<td>
-	              					<button class="btn btn-success">修改</button>
-	              				</td>
-	              			</tr>
-	              			<tr>
-	              				<td>1</td>
-	              				<td>73</td>
-	              				<td>大佬</td>
-	              				<td>上海</td>
-	              				<td>
-	              					<button class="btn btn-success">修改</button>
-	              				</td>
-	              			</tr>
-	              			<tr>
-	              				<td>1</td>
-	              				<td>73</td>
-	              				<td>大佬</td>
-	              				<td>上海</td>
-	              				<td>
-	              					<button class="btn btn-success">修改</button>
+	              					<button class="btn btn-success" @click="editPersonFun(person)">修改</button>
 	              				</td>
 	              			</tr>
 	              		</tbody>
@@ -69,7 +69,7 @@
 	              </div>
 	              <!-- /.box-body -->
 	              <div class="box-footer" style="text-align:left">
-	                页脚显示
+	                当前共	{{ personList.length }} 	条数据
 	              </div>
 	            </form>
 	          </div>
@@ -77,10 +77,10 @@
 	        </div>
 	        <!--/.col (left) -->
 	        <!-- right column -->
-	        <div class="col-md-6">
+	        <div class="col-md-4">
 	          <!-- Horizontal Form -->
 	          <div class="box box-info">
-	            <div class="box-header with-border">
+	            <div class="box-header with-border" style="text-align:left;">
 	              <h3 class="box-title">添加/修改</h3>
 	            </div>
 	            <!-- /.box-header -->
@@ -88,39 +88,37 @@
 	            <form class="form-horizontal">
 	              <div class="box-body">
 	                <div class="form-group">
-	                  <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
-
+	                  <label class="col-sm-2 control-label">编号</label>
 	                  <div class="col-sm-10">
-	                    <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+	                    <input type="input" class="form-control" placeholder="编号" readonly v-model="editPerson.id">
 	                  </div>
 	                </div>
 	                <div class="form-group">
-	                  <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
-
+	                  <label for="inputPassword3" class="col-sm-2 control-label">姓名</label>
 	                  <div class="col-sm-10">
-	                    <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+	                    <input type="text" class="form-control" placeholder="姓名" v-model="editPerson.name">
 	                  </div>
 	                </div>
 	                <div class="form-group">
-	                  <div class="col-sm-offset-2 col-sm-10">
-	                    <div class="checkbox">
-	                      <label>
-	                        <input type="checkbox"> Remember me
-	                      </label>
-	                    </div>
+	                  <label for="inputPassword3" class="col-sm-2 control-label">年龄</label>
+	                  <div class="col-sm-10">
+	                    <input type="number" class="form-control" placeholder="年龄" v-model="editPerson.age">
+	                  </div>
+	                </div>
+	                <div class="form-group">
+	                  <label for="inputPassword3" class="col-sm-2 control-label">地址</label>
+	                  <div class="col-sm-10">
+	                    <input type="text" class="form-control" placeholder="地址" v-model="editPerson.address">
 	                  </div>
 	                </div>
 	              </div>
 	              <!-- /.box-body -->
 	              <div class="box-footer">
-	                <button type="submit" class="btn btn-default">Cancel</button>
-	                <button type="submit" class="btn btn-info pull-right">Sign in</button>
+	                <button class="btn btn-success pull-right">提交</button>
 	              </div>
 	              <!-- /.box-footer -->
 	            </form>
 	          </div>
-	          <!-- /.box -->
-	          
 	          <!-- /.box -->
 	        </div>
 	        <!--/.col (right) -->
@@ -130,3 +128,34 @@
 	    <!-- /.content -->
     </div>
 </template>
+<style></style>
+<script>
+	export default{
+		data() {
+			return {
+				personList:[],
+				person:{},
+				editPerson:{}
+			}
+		},
+		created (){
+			this.seachPerson();		  
+		},
+		methods: {
+			seachPerson: function () {
+				this.$http.get("http://localhost:8999/person/findAll",{"id":"1"}).then(response => {
+			    // get body data
+			    this.personList = response.body;
+			  }, response => {
+			    // error callback
+			    alert("数据加载失败了！");
+			  });
+			},
+			editPersonFun: function (obj) {
+				// 选择修改的
+				this.editPerson = obj;
+			}
+		}
+	}
+</script>
+
