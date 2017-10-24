@@ -102,48 +102,7 @@
 export default{
 	data() {
 		return {
-			ticks:[
-			{
-				"trainNumber":"Z307",
-				"departureStation":"BXP",
-				"destinationStation":"XMS",
-				"initialTime":"16:02",
-				"arriveTime":"10:49",
-				"last":"18:47",
-				"businessSeat":"",
-				"firstSeat":"",
-				"secondSeat":"",
-				"highSleeper":null,
-				"softSleeper":"无",
-				"activeSleeper":null,
-				"hardSleeper":"无",
-				"softSeat":null,
-				"hardSeat":"无",
-				"noSeat":"无",
-				"other":null,
-				"remark":null
-			},
-			{
-				"trainNumber":"K571",
-				"departureStation":"BXP",
-				"destinationStation":"XMS",
-				"initialTime":"16:53",
-				"arriveTime":"21:58",
-				"last":"29:05",
-				"businessSeat":"",
-				"firstSeat":"",
-				"secondSeat":"",
-				"highSleeper":null,
-				"softSleeper":"无",
-				"activeSleeper":null,
-				"hardSleeper":"无",
-				"softSeat":null,
-				"hardSeat":"无",
-				"noSeat":"无",
-				"other":null,
-				"remark":null
-			}
-			],
+			ticks:[],
 			tick: {
 				train_date:"2017-10-22",
 				from_station:"BJP",
@@ -153,12 +112,14 @@ export default{
 		}
 	},
 	created (){
-		this.seachTick();
+		var myDate = new Date();
+		this.tick.train_date = myDate.getFullYear()+"-"+myDate.getMonth()+"-"+myDate.getDate();
+		this.seachTick();		
 	},
 	methods: {
     seachTick: function () {
       console.info(this.tick);
-      const url = "http://ee21bdb2.ngrok.io/ticketInfo/getTicket?train_date="+this.tick.train_date+"&from_station="+this.tick.from_station+"&to_station="+this.tick.to_station+"&purpose_codes="+this.tick.purpose_codes;
+      const url = "http://localhost:8999/ticketInfo/getTicket?train_date="+this.tick.train_date+"&from_station="+this.tick.from_station+"&to_station="+this.tick.to_station+"&purpose_codes="+this.tick.purpose_codes;
 		this.$http.get(url,{credientials:false}).then(response => {
 			    // get body data
 			    console.info(response.body);

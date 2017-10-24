@@ -29,6 +29,9 @@ export default new Router({
         path: '/general',
         component: general
       }, {
+        path: '/ticketInfo',
+        component: ticketInfo
+      }, {
         path: '/person',
         component: person
       }]
