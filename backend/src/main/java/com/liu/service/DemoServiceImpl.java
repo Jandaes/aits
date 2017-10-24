@@ -7,6 +7,7 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author jared
@@ -48,6 +49,36 @@ public class DemoServiceImpl implements DemoService{
     @Cacheable(value="people",key="#person.id")
     public Person findOne(Person person) {
         Person p=personRepository.findOne(person.id);
+        return p;
+    }
+
+    /**
+     * 遇到异常回滚事务
+     * @param person
+     * @return
+     */
+    @Override
+    @Transactional(rollbackFor = {IllegalArgumentException.class})
+    public Person savePersonWithRollBack(Person person) {
+        Person p=personRepository.save(person);
+        if(person.getName().equals("73")){
+            throw new IllegalArgumentException("73已存在，。回滚吧，皮卡丘..");
+        }
+        return p;
+    }
+
+    /**
+     * 遇到异常不回滚事物
+     * @param person
+     * @return
+     */
+    @Override
+    @Transactional(noRollbackFor = {IllegalArgumentException.class})
+    public Person savePersonWithoutRollBack(Person person) {
+        Person p=personRepository.save(person);
+        if(person.getName().equals("73")){
+            throw new IllegalArgumentException("73已存在，。然而并没有什么暖用，不回滚..");
+        }
         return p;
     }
 }
