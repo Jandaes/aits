@@ -1,4 +1,4 @@
-package com.liu.ticket.service;
+package com.aits.service;
 
 import java.util.List;
 import java.util.Map;

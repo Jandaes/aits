@@ -1,6 +1,6 @@
-package com.liu.service;
+package com.aits.service;
 
-import com.liu.entity.Person;
+import com.aits.entity.Person;
 
 /**
  * @author jared

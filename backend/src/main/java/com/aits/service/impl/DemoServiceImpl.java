@@ -1,7 +1,8 @@
-package com.liu.service;
+package com.aits.service.impl;
 
-import com.liu.dao.PersonRepository;
-import com.liu.entity.Person;
+import com.aits.dao.PersonRepository;
+import com.aits.entity.Person;
+import com.aits.service.DemoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
@@ -13,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @author jared
  */
 @Service
-public class DemoServiceImpl implements DemoService{
+public class DemoServiceImpl implements DemoService {
     @Autowired
     PersonRepository personRepository;
 

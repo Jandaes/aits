@@ -1,4 +1,4 @@
-package com.liu.ticket.bean;
+package com.aits.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -1,4 +1,4 @@
-package com.liu.utils;
+package com.aits.utils;
 
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.util.ByteSource;

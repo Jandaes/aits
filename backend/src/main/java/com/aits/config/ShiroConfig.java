@@ -1,6 +1,6 @@
-package com.liu.config;
+package com.aits.config;
 
-import com.liu.shiro.UserRealm;
+import com.aits.shiro.UserRealm;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;

@@ -1,9 +1,9 @@
-package com.liu;
+package com.aits.controller;
 
-import com.liu.dao.PersonRepository;
-import com.liu.entity.Person;
-import com.liu.service.DemoService;
-import com.liu.utils.MD5Utils;
+import com.aits.dao.PersonRepository;
+import com.aits.entity.Person;
+import com.aits.service.DemoService;
+import com.aits.utils.MD5Utils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;

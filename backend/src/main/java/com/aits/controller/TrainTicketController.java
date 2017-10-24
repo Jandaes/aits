@@ -1,8 +1,8 @@
-package com.liu.ticket;
+package com.aits.controller;
 
 import com.alibaba.fastjson.JSONObject;
-import com.liu.ticket.bean.QueryLine;
-import com.liu.ticket.service.CityCodeService;
+import com.aits.entity.QueryLine;
+import com.aits.service.CityCodeService;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -23,8 +23,6 @@ import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.*;

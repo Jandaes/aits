@@ -1,7 +1,7 @@
-package com.liu.ticket.controller;
+package com.aits.controller;
 
-import com.liu.dao.PersonRepository;
-import com.liu.entity.Person;
+import com.aits.dao.PersonRepository;
+import com.aits.entity.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Controller;

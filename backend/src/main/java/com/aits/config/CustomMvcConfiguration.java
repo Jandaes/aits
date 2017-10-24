@@ -1,4 +1,4 @@
-package com.liu.config;
+package com.aits.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

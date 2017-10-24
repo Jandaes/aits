@@ -1,5 +1,6 @@
-package com.liu.ticket.service;
+package com.aits.service.impl;
 
+import com.aits.service.CityCodeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -14,7 +15,7 @@ import java.util.Map;
  * @author jared
  */
 @Service
-public class CityCodeServiceImpl implements  CityCodeService {
+public class CityCodeServiceImpl implements CityCodeService {
     @Autowired
     JdbcTemplate jdbcTemplate;
 

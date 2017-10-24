@@ -1,6 +1,6 @@
-package com.liu.dao;
+package com.aits.dao;
 
-import com.liu.entity.Person;
+import com.aits.entity.Person;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
