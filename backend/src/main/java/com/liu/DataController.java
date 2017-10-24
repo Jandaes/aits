@@ -2,6 +2,7 @@ package com.liu;
 
 import com.liu.dao.PersonRepository;
 import com.liu.entity.Person;
+import com.liu.service.DemoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -19,7 +20,8 @@ public class DataController {
     //springData Jpa已自动注入bean
     @Autowired
     PersonRepository personRepository;
-
+    @Autowired
+    DemoService demoService;
     /**
      * 支持批量保存：<S extends T>  Iterable<S> save(Iterable<s> entities);
      * 删除：
@@ -56,5 +58,16 @@ public class DataController {
         return people;
     }
 
-
+    /**
+     * 缓存测试，查询此方法，若sql只执行一次，则缓存生效
+     * @param id
+     * @return
+     */
+    @RequestMapping("/getOne")
+    public Person getOne(Long id){
+        Person p=new Person();
+        p.setId(id);
+      Person person=  demoService.findOne(p);
+        return person;
+    }
 }
