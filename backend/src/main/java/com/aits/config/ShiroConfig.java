@@ -1,6 +1,7 @@
 package com.aits.config;
 
 import com.aits.shiro.UserRealm;
+import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
@@ -30,7 +31,22 @@ public class ShiroConfig {
 	UserRealm userRealm(EhCacheManager cacheManager) {
 		UserRealm userRealm = new UserRealm();
 		userRealm.setCacheManager(cacheManager);
+		userRealm.setCredentialsMatcher(credentialsMatcher());
 		return userRealm;
+	}
+
+	/**
+	 * 加密策略
+	 * @return
+	 */
+	@Bean
+	HashedCredentialsMatcher credentialsMatcher(){
+		HashedCredentialsMatcher hashedCredentialsMatcher = new HashedCredentialsMatcher();
+		//加密方式
+		hashedCredentialsMatcher.setHashAlgorithmName("MD5");
+		//加密次数
+		hashedCredentialsMatcher.setHashIterations(1024);
+		return hashedCredentialsMatcher;
 	}
 
 	@Bean

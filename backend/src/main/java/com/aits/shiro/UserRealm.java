@@ -8,6 +8,7 @@ import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.apache.shiro.util.ByteSource;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -51,7 +52,9 @@ public class UserRealm extends AuthorizingRealm {
         String password=new String((char[]) token.getCredentials());
         System.out.println("pass=:"+password);
         System.out.println("getName:"+getName());
-        SimpleAuthenticationInfo info=new SimpleAuthenticationInfo(username,password,getName());
+        //盐值加密
+        ByteSource credentiallsSalt = ByteSource.Util.bytes(username);
+        SimpleAuthenticationInfo info=new SimpleAuthenticationInfo(username,password,credentiallsSalt,getName());
         return info;
     }
 }
