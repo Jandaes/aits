@@ -70,4 +70,26 @@ public class DataController {
       Person person=  demoService.findOne(p);
         return person;
     }
+
+    /**
+     * 测试事物回滚：http://localhost:8999/rollback?name=73&age=50
+     * @param person
+     * @return
+     */
+    @RequestMapping("/rollback")
+    public Person rollback(Person person){
+        return demoService.savePersonWithRollBack(person);
+    }
+
+    /**
+     * 测试事物不回滚：http://localhost:8999/norollback?name=73&age=50
+     * @param person
+     * @return
+     */
+    @RequestMapping("/norollback")
+    public Person noRollback(Person person){
+        return demoService.savePersonWithoutRollBack(person);
+    }
+
+
 }
