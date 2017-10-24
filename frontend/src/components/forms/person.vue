@@ -143,7 +143,8 @@
 		},
 		methods: {
 			seachPerson: function () {
-				this.$http.get("http://localhost:8999/person/findAll",{"id":"1"}).then(response => {
+				var formData = JSON.stringify(this.person);
+				this.$http.post("http://localhost:8999/person/findAll",formData).then(response => {
 			    // get body data
 			    this.personList = response.body;
 			  }, response => {
