@@ -20,7 +20,7 @@ public class Person {
     @Id
     //注解默认使用主键声称方式为自增
     @GeneratedValue
-    Integer id;
+    public  Long id;
     String name;
     Integer age;
     String address;
