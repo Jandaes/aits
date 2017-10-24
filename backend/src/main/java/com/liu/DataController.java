@@ -3,6 +3,10 @@ package com.liu;
 import com.liu.dao.PersonRepository;
 import com.liu.entity.Person;
 import com.liu.service.DemoService;
+import com.liu.utils.MD5Utils;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -91,5 +95,23 @@ public class DataController {
         return demoService.savePersonWithoutRollBack(person);
     }
 
+    /**
+     * shiro校验登录
+     * @param user
+     * @param password
+     * @return
+     */
+    @RequestMapping("/check")
+    public String check(String user, String password) {
+        System.out.println(user);
+        System.out.println(password);
+        String pass = MD5Utils.encrypt(user, password);
+        System.out.println("encrypass:" + pass);
+
+        UsernamePasswordToken token = new UsernamePasswordToken(user, pass);
+        Subject subject = SecurityUtils.getSubject();
+        subject.login(token);
+        return "success";
+    }
 
 }
