@@ -139,12 +139,18 @@
 			}
 		},
 		created (){
-			this.seachPerson();		  
+				this.$http.post("http://localhost:8999/person/findAll").then(response => {
+			    // get body data
+			    this.personList = response.body;
+			  }, response => {
+			    // error callback
+			    alert("数据加载失败了！");
+			  }); 
 		},
 		methods: {
 			seachPerson: function () {
 				var formData = JSON.stringify(this.person);
-				this.$http.post("http://localhost:8999/person/findAll",formData).then(response => {
+				this.$http.post("http://localhost:8999/person/query",formData).then(response => {
 			    // get body data
 			    this.personList = response.body;
 			  }, response => {

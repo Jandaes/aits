@@ -26,6 +26,16 @@ public interface PersonRepository extends JpaRepository<Person,Long>{
      */
     List<Person> findByName(String name);
 
+
+    /**
+     * select * from person where name like '%大佬%' and age = 1 and address='上海%'
+     * @param name
+     * @param age
+     * @param address
+     * @return
+     */
+    List<Person> findByNameContainingAndAgeAndAddressStartingWith(String name,Integer age,String address);
+
     /**
      * 通过名字like查询，参数为name
      * 相当于JPQL：select p from Person p where p.name like ?1

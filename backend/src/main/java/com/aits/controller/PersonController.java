@@ -3,7 +3,6 @@ package com.aits.controller;
 import com.aits.dao.PersonRepository;
 import com.aits.entity.Person;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,9 +24,16 @@ public class PersonController {
 
     @RequestMapping("/findAll")
     @ResponseBody
-    public List<Person> findAll(@RequestBody Person person){
-        Example example = Example.of(person);
-        List<Person> personList = personRepository.findAll(example);
+    public List<Person> findAll(){
+        List<Person> personList = personRepository.findAll();
         return personList;
     }
+
+    @RequestMapping("/query")
+    @ResponseBody
+    public List<Person> query(@RequestBody Person person){
+        List<Person> personList = personRepository.findByNameContainingAndAgeAndAddressStartingWith(person.getName(),person.getAge(),person.getAddress());
+        return personList;
+    }
+
 }
