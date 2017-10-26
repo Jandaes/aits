@@ -23,6 +23,10 @@ import '../assets/js/app.min.js'
 // AdminLTE for demo purposes
 import '../assets/js/demo.js'
 
+// socketjs.min.js
+import '../assets/js/sockjs.min.js'
+// stomp.min.ks
+import '../assets/js/stomp.min.js'
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
