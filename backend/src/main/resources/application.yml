@@ -5,3 +5,13 @@
 #    url: jdbc:mysql://127.0.0.1:3306/ticket
 #    username: root
 #    password: 123456
+
+#spring:
+#   data:
+#        elasticsearch:
+#            cluster-name: demo4 #默认为elasticsearch
+#            cluster-nodes: 127.0.0.1:9100 #配置es节点信息，逗号分隔，如果没有指定，则启动ClientNode
+#            properties:
+#                path:
+#                  logs: ./elasticsearch/log #elasticsearch日志存储目录
+#                  data: ./elasticsearch/data #elasticsearch数据存储目录

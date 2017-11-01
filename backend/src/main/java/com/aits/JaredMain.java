@@ -15,4 +15,5 @@ public class JaredMain {
     public static void main(String[] args) {
         SpringApplication.run(JaredMain.class, args);
     }
+
 }
