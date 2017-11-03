@@ -13,16 +13,16 @@ public class QiniuTest {
     public static void main(String[] args) {
         //构造一个带指定Zone对象的配置类
         Configuration cfg = new Configuration(Zone.zone0());
-//...其他参数参考类注释
+        //...其他参数参考类注释
 
         UploadManager uploadManager = new UploadManager(cfg);
-//...生成上传凭证，然后准备上传
+        //...生成上传凭证，然后准备上传
         String accessKey = "pZgq-AFCS_lnHD0JmgUOISpTDWIfXa6lLBw2LD3N";
         String secretKey = "B7UHwIhHysgRlfVNISjVX7ViGOQ5UrjCSdrvvbwK";
         String bucket = "jared73";
-//如果是Windows情况下，格式是 D:\\qiniu\\test.png
+        //如果是Windows情况下，格式是 D:\\qiniu\\test.png
         String localFilePath = "C:\\Users\\Administrator\\Desktop\\11.bmp";
-//默认不指定key的情况下，以文件内容的hash值作为文件名
+        //默认不指定key的情况下，以文件内容的hash值作为文件名
         String key = null;
 
         Auth auth = Auth.create(accessKey, secretKey);
