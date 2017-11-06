@@ -15,7 +15,7 @@
         router                    用来配置路由的
             index.js
         App.vue
-        main.js                   页面
+        main.js                   页面根节点入口
       static
         .gitkeep
       test
