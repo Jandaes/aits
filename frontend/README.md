@@ -1,3 +1,36 @@
+##脚手架目录结构说明
+###  frontend
+      build
+      config
+         -dev.env.js
+         -index.js                这个是配置文件
+         -prod.env.js
+         -test.env.js
+      node_modules
+      src                         这个是我们用来写各种代码的地方
+        assets                    用来存图片
+            logo.png
+        components                用来存组件的
+            Hello.vue
+        router                    用来配置路由的
+            index.js
+        App.vue
+        main.js                   页面
+      static
+        .gitkeep
+      test
+        .babelrc
+        .editorconfig
+        .eslintignore
+        .eslintrc.js
+        .gitignore
+        .postcssrc.js
+        .index.html
+        .package.json
+        README.md  
+
+
+
 # frontend
 
 > A Vue.js project
