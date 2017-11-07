@@ -56,7 +56,7 @@
     watch: {
         'message':  {
             handler:()=>{
-              alert("hello");
+              alert("hello1");
             }
         }
     }
