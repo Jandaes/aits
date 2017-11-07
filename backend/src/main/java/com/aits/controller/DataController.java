@@ -105,10 +105,10 @@ public class DataController {
     public String check(String user, String password) {
         System.out.println(user);
         System.out.println(password);
-        String pass = MD5Utils.encrypt(user, password);
-        System.out.println("encrypass:" + pass);
+      //  String pass = MD5Utils.encrypt(user, password);
+     //   System.out.println("encrypass:" + pass);
 
-        UsernamePasswordToken token = new UsernamePasswordToken(user, pass);
+        UsernamePasswordToken token = new UsernamePasswordToken(user, password);
         Subject subject = SecurityUtils.getSubject();
         subject.login(token);
         return "success";
