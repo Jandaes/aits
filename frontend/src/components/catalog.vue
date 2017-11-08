@@ -96,10 +96,21 @@
       </div>
     </div>
   </div>
+
+  <!--侦听器-->
+  <div>
+    <p>
+      Ask a yes/no question:
+      <input v-model="question">
+    </p>
+    <p>{{ answer }}</p>
+  </div>
+
   </html>
 </template>
 <script>
-
+  let _ = require("lodash");
+  let axios = require('axios');
   export default {
     // el:'#app',
     data() {
@@ -122,8 +133,10 @@
         lastName: 'liu',
         fullName: 'Jared liu',
         first: 's1',
-        last: 'l1'
+        last: 'l1',
         // doSomething: 'reverseMessage'
+        question: '',
+        answer: 'I cannot give you an answer until you ask a question!'
       }
     },
     //也有一些其他的钩子，在实例生命周期中不同场景下调用，如mounted、updated、destroyed，钩子的this指向调用它的Vue实例
@@ -146,7 +159,30 @@
       },
       nowTime: function () {
         return Date.now();
-      }
+      },
+      // _.debounce是一个通过Lodash限制操作频率的函数(函数去抖，也就是说当调用动作n毫秒后，才会执行该动作，若在这n毫秒内又调用此动作则将重新计算执行时间)
+      //在本demo中，这里限制了访问yesno.wtf/api的频率
+      //AJAX请求直接到用户输入完毕才会发出
+      //
+      getAnswer:_.debounce(
+        function () {
+          alert("111")
+          if(this.question.indexOf('?')=== -1){
+            this.answer = 'Questions usually contain a question mark...'
+            return
+          }
+          this.answer = 'Thinking...'
+          var vm= this
+          axios.get('https://yesno.wtf/api')
+            .then(function (response) {
+              vm.answer = _.capitalize(response.data.answer)
+            })
+            .cache(function (error) {
+              vm.answer = 'Error!Could not reach the API.'+error
+            })
+        },
+        500
+      )
     },
     computed: {
       //计算属性的getter
@@ -185,7 +221,13 @@
       },
       'lastName': function (val) {
         this.fullName = this.firstName + val
+      },
+      //如果'question'发生改变，这个函数就会运行
+      question: function () {
+        this.answer= 'Waiting for you to stop typing...'
+        this.getAnswer()
       }
+
     }
   }
 
