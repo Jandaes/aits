@@ -54,6 +54,48 @@
   <a v-bind:href="url">请看我的url跳转</a>
   <!--v-on命令用于监听DOM事件-->
   <a v-on:click="doSomething">监听点击事件</a>
+  <!--阻止元素发生默认行为，此时action将不能提交-->
+  <form v-on:submit.prevent="onSubmit" action="http://www.baidu.com">.I am form..
+    <button type="submit">submit</button>
+  </form>
+
+  <!--缩写方式-->
+  <div>
+    <a v-bind:href="url">.完整..</a>
+    <a :href="url">.缩写..</a>
+
+    <a v-on:click="doSomething">.完整..</a>
+    <a @click="doSomething">.缩写..</a>
+  </div>
+
+  <!--计算属性-->
+  <div>
+    {{ message.split('').reverse().join('')}}
+    <!--计算属性和方法pk-->
+    <div>
+      <p>Original message : "{{message}}"</p>
+      <p>Compited reversed message: "{{reversedMessage}}"</p>
+      <!--用着这种调用方法的方式也是可以执行的,区别：计算属性除非它们依赖的值变化了才会重新求值，否则会立刻返回结果，并不会再次执行函数，调用方法的话，每次都会执行函数-->
+      <p>Compited reversed message: "{{reversed()}}"</p>
+      <!--这里的缓存是指一次请求同一个页面出现多次标签，刚开始我的理解错误-->
+      <p>当前时间:{{ now}}</p>
+      <p>当前时间:{{ nowTime()}}</p>
+      <p>当前时间:{{ now}}</p>
+      <p>当前时间:{{ nowTime()}}</p>
+    </div>
+    <!--计算属性和watch进行pk-->
+    <div>
+      firstName:<input v-model="firstName">
+      lastname:<input v-model="lastName">
+      fullName: {{fullName}}-----假装有分隔符-----
+      fullNameC:{{fullNameC}}
+      <div>setter测试
+        fullNameS:<input v-model="fullNameS">
+        first:<input v-model="last">
+        last:<input v-model="first">
+      </div>
+    </div>
+  </div>
   </html>
 </template>
 <script>
@@ -75,8 +117,13 @@
         number: 1,
         ok: 'YES',
         id: 22,
-        url: 'http://www.baidu.com'
-       // doSomething: 'reverseMessage'
+        url: 'http://www.baidu.com',
+        firstName: 'jared',
+        lastName: 'liu',
+        fullName: 'Jared liu',
+        first: 's1',
+        last: 'l1'
+        // doSomething: 'reverseMessage'
       }
     },
     //也有一些其他的钩子，在实例生命周期中不同场景下调用，如mounted、updated、destroyed，钩子的this指向调用它的Vue实例
@@ -90,13 +137,54 @@
       },
       doSomething: function () {
         alert("我是触发出来的事件");
+      },
+      onSubmit: function () {
+        alert("我是提交之前执行的，哈哈哈");
+      },
+      reversed: function () {
+        return this.message.split('').reverse().join('');
+      },
+      nowTime: function () {
+        return Date.now();
       }
+    },
+    computed: {
+      //计算属性的getter
+      reversedMessage: function () {
+        //this指向vm实例
+        return this.message.split('').reverse().join('')
+      },
+      now: function () {
+        return Date.now()
+      },
+      fullNameC: function () {
+        return this.firstName + this.lastName
+      },
+      fullNameS: {
+        //getter
+        get: function () {
+          return this.fullNameS=this.first+" "+this.last
+        },
+        set: function (val) {
+          var names=val.split(" ")
+          this.first=names[0]
+          this.last=names[names.length-1]
+        }
+
+      }
+
     },
     watch: {
       'message': {
         handler: () => {
           alert("watch");
         }
+      },
+      'firstName': function (val) {
+        this.fullName = val + this.lastName
+      },
+      'lastName': function (val) {
+        this.fullName = this.firstName + val
       }
     }
   }
