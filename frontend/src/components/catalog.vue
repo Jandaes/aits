@@ -105,8 +105,201 @@
     </p>
     <p>{{ answer }}</p>
   </div>
+  <!--通过v-bind:class，动态切换class-->
+  <div v-bind:class="{ active : isActive , 'text-danger' : hasError }">class</div>
+  <!--渲染效果和上面一样，这里绑定一个返回对象的计算属性，这个是常用且强大的模式-->
+  <div v-bind:class="classObject">properties</div>
+  <!--数组传给v-bind:class-->
+  <div v-bind:class="[activeClass,errorClass]">arrays</div>
+  <!--三元表达式-->
+  <div v-bind:class="[isActive?activeClass:'',errorClass]">sanmu</div>
+  <!--上边的写法将会始终添加errorClass，其实只有在isActive是truthy时才会添加activeClass-->
+  <!--多条件class时，写法略繁琐，所以在数组语法中也可以使用对象语法-->
+  <div v-bind:class="[{ active : isActive}, errorClass]">duixiang</div>
 
+  <!--现在开始条件渲染ok/true  -->
+  <h1 v-if="ok">Yes</h1>
+  <h1 v-else>No</h1>
+
+  <div v-if="Math.random() > 0.5">
+    Now you see me
+  </div>
+  <div v-else>
+    Now you don't
+  </div>
+  <!--vue2.1.0新增的v-else-if-->
+  <div v-if="type === 'A'">
+    A
+  </div>
+  <div v-if="type === 'B'">
+    B
+  </div>
+  <div v-if="type === 'C'">
+    C
+  </div>
+  <div v-else>
+    Not A/B/C
+  </div>
+
+  <!--搞一次条件控制模块渲染-->
+  <div>
+    <div v-if="loginType === 'username'">
+      <label>Username</label>
+      <!--加入key会使输入框重新渲染-->
+      <input placeholder="Enter your username" key="username-input">
+    </div>
+    <div v-else>
+      <label>Email</label>
+      <input placeholder="Enter your email address" key="email-input">
+    </div>
+    <button @click="changeButton">changeButton</button>
+  </div>
+
+
+  <!--v-show不支持template，也不支持v-else-->
+  <!--v-show只是简单地切换元素css属性display，v-show的元素始终被渲染并保留在DOM中-->
+  <!--v-if 是“真正”的条件渲染，因为它会确保在切换过程中条件块内的事件监听器和子组件适当地被销毁和重建。-->
+  <!--v-if 也是惰性的：如果在初始渲染时条件为假，则什么也不做——直到条件第一次变为真时，才会开始渲染条件块。-->
+  <!--相比之下，v-show 就简单得多——不管初始条件是什么，元素总是会被渲染，并且只是简单地基于 CSS 进行切换。-->
+  <!--一般来说，v-if 有更高的切换开销，而 v-show 有更高的初始渲染开销。因此，如果需要非常频繁地切换，则使用 v-show 较好；如果在运行时条件很少改变，则使用 v-if 较好。-->
+  <div v-show="ok">Hello</div>
+  <!--v-if和v-for一起使用时，v-for比v-if更高的优先级-->
+
+
+  <!--开始列表渲染-->
+  <!--v-for 指令需要使用 item in items 形式的特殊语法，items 是源数据数组并且 item 是数组元素迭代的别名。-->
+  <ul>
+    <li v-for="item in items">
+      {{ item.message }}
+    </li>
+  </ul>
+
+  <ul>
+    <!--迭代数组，of可以替换in -->
+    <li v-for="( item ,index ) in items">
+      {{ parentMessage }} - {{ index }} - {{ item.message }}
+    </li>
+  </ul>
+
+  <!--一个对象的v-for-->
+  <ul>
+    <li v-for="value in object">
+      {{ value }}
+    </li>
+  </ul>
+  <!--第二个参数为键名-->
+  <div v-for=" ( value , key ) in object">
+    {{ key }}: {{ value}}
+  </div>
+  <!--第三个参数为索引-->
+  <div v-for="(value,key,index) in object">
+    {{ index}}.{{key}}:{{value}}
+  </div>
+
+  <!--数据更新检测-->
+  <!--变异方法，会改变被这些方法调用的原始数组-->
+  <!--push()、pop()、shift()、unshift()、splice()、sort()、reverse()-->
+
+  <!--非变异方法，不会改变原始数组，但总是返回一个新数组，当使用非变异方法时，可以用新数组替换旧数组-->
+  <!--filter(), concat() 和 slice()-->
+  <!-- ------------------------由于 JavaScript 的限制，Vue 不能检测以下变动的数组：-----------------------
+   当你利用索引直接设置一个项时，例如：vm.items[indexOfItem] = newValue
+   当你修改数组的长度时，例如：vm.items.length = newLength
+   为了解决第一类问题，以下两种方式都可以实现和 vm.items[indexOfItem] = newValue 相同的效果，同时也将触发状态更新：
+   // Vue.set
+   Vue.set(example1.items, indexOfItem, newValue)
+   // Array.prototype.splice
+   example1.items.splice(indexOfItem, 1, newValue)
+   为了解决第二类问题，你可以使用 splice：
+   example1.items.splice(newLength)-->
+
+
+  <!--对象更改检测注意事项-->
+  <!--还是由于 JavaScript 的限制，Vue 不能检测对象属性的添加或删除：-->
+  <!--var vm = new Vue({-->
+  <!--data: {-->
+  <!--a: 1-->
+  <!--}-->
+  <!--})-->
+  <!--// `vm.a` 现在是响应式的-->
+  <!--vm.b = 2-->
+  <!--// `vm.b` 不是响应式的-->
+  <!--对于已经创建的实例，Vue 不能动态添加根级别的响应式属性。但是，可以使用 Vue.set(object, key, value) 方法向嵌套对象添加响应式属性。例如，对于：-->
+  <!--var vm = new Vue({-->
+  <!--data: {-->
+  <!--userProfile: {-->
+  <!--name: 'Anika'-->
+  <!--}-->
+  <!--}-->
+  <!--})-->
+  <!--你可以添加一个新的 age 属性到嵌套的 userProfile 对象：-->
+  <!--Vue.set(vm.userProfile, 'age', 27)-->
+  <!--你还可以使用 vm.$set 实例方法，它只是全局 Vue.set 的别名：-->
+  <!--this.$set(this.userProfile, 'age', 27)-->
+  <!--有时你可能需要为已有对象赋予多个新属性，比如使用 Object.assign() 或 _.extend()。在这种情况下，你应该用两个对象的属性创建一个新的对象。所以，如果你想添加新的响应式属性，不要像这样：-->
+  <!--Object.assign(this.userProfile, {-->
+  <!--age: 27,-->
+  <!--favoriteColor: 'Vue Green'-->
+  <!--})-->
+  <!--你应该这样做：-->
+  <!--this.userProfile = Object.assign({}, this.userProfile, {-->
+  <!--age: 27,-->
+  <!--favoriteColor: 'Vue Green'-->
+  <!--})-->
+
+  <!--显示过滤/排序结果,不改变或重置原始数据-->
+  <li v-for="n in evenNumbers">{{n}}</li>
+
+  <!--或者使用方法-->
+  <li v-for="n in even(numbers)">{{n}}</li>
+
+  <!--一段取值范围v-for-->
+  <div>
+    <span v-for="n in 10">{{n}}</span>
+  </div>
+<!--v-for优先级比v-if更高，所以v-if将分别重复运行于每个v-for循环中，当想为仅有的一些渲染节点时，这种优先级比较有用-->
+  <!--在2.2.0+的版本中，当组件中使用v-for时，key现在是必须的-->
+  <li v-for="todo in todos" v-if="!todo.isComplete" :key="todo.isComplete">
+    {{todo}}
+  </li>
+
+  <!--事件处理-->
+  <div>
+    <button v-on:click="counter += 1">增加1</button>
+    <p>这个按钮被点击了{{counter}}次</p>
+  </div>
+
+  <!--有的事件逻辑比较复杂，所以不会把js代码写在v-on指令是不行的-->
+  <div>
+    <button v-on:click="greet">Greet</button>
+  </div>
+
+  <!--内联处理器里的方法-->
+  <div>
+    <button v-on:click="say('hi')">Say Hi</button>
+    <button v-on:click="say('what')">Say what</button>
+  </div>
+
+  <!--有时需要内联语句处理器中访问原生DOM事件，可以用特殊变量$event把它传入方法-->
+  <button v-on:click="warn('Form cannot be submitted yet',$event)">Submit</button>
+
+  <!--事件修饰符，methods 只有纯粹的数据逻辑，而不是去处理 DOM 事件细节-->
+  <!--Vue.js 为 v-on 提供了事件修饰符。通过由点 (.) 表示的指令后缀来调用修饰符。-->
+  <!--.stop 、.prevent 、  .capture  、   .self   、  .once-->
+  <!-- 阻止单击事件冒泡 -->
+  <!--<a v-on:click.stop="doThis"></a>-->
+  <!-- 提交事件不再重载页面 -->
+  <!--<form v-on:submit.prevent="onSubmit"></form>-->
+  <!-- 修饰符可以串联 -->
+  <!--<a v-on:click.stop.prevent="doThat"></a>-->
+  <!-- 只有修饰符 -->
+  <!--<form v-on:submit.prevent></form>-->
+  <!-- 添加事件侦听器时使用事件捕获模式 -->
+  <!--<div v-on:click.capture="doThis">...</div>-->
+  <!-- 只当事件在该元素本身 (比如不是子元素) 触发时触发回调 2.1.4新增-->
+  <!--<div v-on:click.self="doThat">...</div>-->
   </html>
+
 </template>
 <script>
   let _ = require("lodash");
@@ -120,9 +313,10 @@
         isButtonDisabled: true,
         seen: true,
         todos: [
-          {text: 'i am one'},
-          {text: 'i am two'},
-          {text: 'i am three'}
+          {id:1,text: 'i am one'},
+          {id:2,text: 'i am two'},
+          {id:3,text: 'i am three'},
+          {id:4,isComplete:true,text:'i am four'}
         ],
         replacehaha: '<div>hello，我是真正的html标签</div>',
         number: 1,
@@ -136,7 +330,27 @@
         last: 'l1',
         // doSomething: 'reverseMessage'
         question: '',
-        answer: 'I cannot give you an answer until you ask a question!'
+        answer: 'I cannot give you an answer until you ask a question!',
+        isActive: true,
+        error: null,
+        hasError: false,
+        activeClass: 'active',
+        errorClass: 'text-danger',
+        type: 'A',
+        loginType: 'username',
+        items: [
+          {message: 'Foo'},
+          {message: 'Jared'}
+        ],
+        parentMessage: 'Parent',
+        object: {
+          firstName: 'john',
+          lastName: 'Doe',
+          age: 30
+        },
+        numbers: [1, 2, 3, 4, 5],
+        counter: 0,
+        name: 'Vue.js'
       }
     },
     //也有一些其他的钩子，在实例生命周期中不同场景下调用，如mounted、updated、destroyed，钩子的this指向调用它的Vue实例
@@ -164,25 +378,51 @@
       //在本demo中，这里限制了访问yesno.wtf/api的频率
       //AJAX请求直接到用户输入完毕才会发出
       //
-      getAnswer:_.debounce(
+      getAnswer: _.debounce(
         function () {
           alert("111")
-          if(this.question.indexOf('?')=== -1){
+          if (this.question.indexOf('?') === -1) {
             this.answer = 'Questions usually contain a question mark...'
             return
           }
           this.answer = 'Thinking...'
-          var vm= this
+          var vm = this
           axios.get('https://yesno.wtf/api')
             .then(function (response) {
               vm.answer = _.capitalize(response.data.answer)
             })
             .cache(function (error) {
-              vm.answer = 'Error!Could not reach the API.'+error
+              vm.answer = 'Error!Could not reach the API.' + error
             })
         },
         500
-      )
+      ),
+      changeButton: function () {
+        this.loginType = 'll'
+      },
+      even: function (numbers) {
+        return numbers.filter(function (number) {
+          return number % 2 ===0
+        })
+      },
+      greet: function (event) {
+        // 'this' 在方法里指当前Vue实例
+        alert("Hello "+this.name+" !")
+        // event是原生DOM事件
+        if(event){
+          alert(event.target.tagName);
+        }
+      },
+      say: function (message) {
+        alert(message);
+      },
+      warn: function (message,event) {
+       //现在我们可以访问原生事件对象
+        if(event){
+          event.preventDefault()
+        }
+        alert(message)
+      }
     },
     computed: {
       //计算属性的getter
@@ -199,14 +439,25 @@
       fullNameS: {
         //getter
         get: function () {
-          return this.fullNameS=this.first+" "+this.last
+          return this.fullNameS = this.first + " " + this.last
         },
         set: function (val) {
-          var names=val.split(" ")
-          this.first=names[0]
-          this.last=names[names.length-1]
+          var names = val.split(" ")
+          this.first = names[0]
+          this.last = names[names.length - 1]
         }
 
+      },
+      classObject: function () {
+        return {
+          active: this.isActive && !this.error,
+          'text-danger': this.error && this.error.type === 'fatal'
+        }
+      },
+      evenNumbers: function () {
+        return this.numbers.filter(function (number) {
+          return number % 2 === 0
+        })
       }
 
     },
@@ -224,7 +475,7 @@
       },
       //如果'question'发生改变，这个函数就会运行
       question: function () {
-        this.answer= 'Waiting for you to stop typing...'
+        this.answer = 'Waiting for you to stop typing...'
         this.getAnswer()
       }
 
