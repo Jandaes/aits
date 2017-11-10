@@ -13,6 +13,6 @@ public class Test {
             //压缩文件
             compress.compress("C:\\Users\\Administrator\\Desktop\\11.bmp",
                     "C:\\Users\\Administrator\\Desktop\\my.zip");
-
+            
     }
 }

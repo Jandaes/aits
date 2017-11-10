@@ -8,6 +8,7 @@ import deviceCatalog2 from '@/components/catalog2'
 import general from '@/components/forms/general'
 import ticketInfo from '@/components/forms/ticketInfo'
 import person from '@/components/forms/person'
+import login from '@/components/login'
 
 // 导入定义路由
 Vue.use(Router)
@@ -16,8 +17,12 @@ Vue.use(VueResource)
 export default new Router({
   routes: [
     {
-      path: '/',
-      name: 'Hello',
+      path: '/login',
+      name: 'login',
+      component: login
+    }, {
+      path: '/index',
+      name: 'index',
       component: index,
       children: [{
         path: '/deviceCatalog',

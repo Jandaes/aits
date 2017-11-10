@@ -27,6 +27,10 @@ import '../assets/js/demo.js'
 import '../assets/js/sockjs.min.js'
 // stomp.min.ks
 import '../assets/js/stomp.min.js'
+
+//import '../node_modules/lodash/lodash'
+
+
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

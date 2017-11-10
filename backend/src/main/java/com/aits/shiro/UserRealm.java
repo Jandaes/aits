@@ -53,17 +53,14 @@ public class UserRealm extends AuthorizingRealm {
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
         String username = (String) token.getPrincipal();
+        String password = new String((char[]) token.getCredentials());
+        System.out.println("pass"+password);
         User user = new User();
-        user.setUsername("123");
-        user.setPassword("456");
+        user.setUsername(username);
+        user.setPassword(password);
         List<User> list = userService.findByUsernameAndPassword(user);
-
-        System.out.println("uname:" + username);
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("username", username);
-        String password = new String((char[]) token.getCredentials());
-        System.out.println("pass=:" + password);
-        System.out.println("getName:" + getName());
         //盐值加密
         ByteSource credentiallsSalt = ByteSource.Util.bytes(password);
         SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(username, password, credentiallsSalt, getName());
