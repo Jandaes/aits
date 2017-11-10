@@ -5,6 +5,7 @@ import com.aits.service.UserService;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
+import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
@@ -55,17 +56,24 @@ public class UserRealm extends AuthorizingRealm {
             throw new AccountException("Null usernames are not allowed by this realm.");
         }
         String password = new String((char[]) token.getCredentials());
-        System.out.println("name:\t"+username);
-        System.out.println("pass:\t"+password);
+        Object result = new SimpleHash("MD5", password,username, 1024);
         User user = new User();
         user.setUsername(username);
-        user.setPassword(password);
+        user.setPassword(result.toString());
         List<User> list = userService.findByUsernameAndPassword(user);
-        Map<String, Object> map = new HashMap<String, Object>();
-        map.put("username", username);
+        user = new User();
+        if(list.size()>0){
+            user = list.get(0);
+            if (!user.getUsername().equals(username)){
+                throw new UnknownAccountException("帐号或密码错误");
+            }
+        }else {
+            throw new UnknownAccountException("用户不存在");
+        }
+
         //盐值加密
-        ByteSource credentiallsSalt = ByteSource.Util.bytes(password);
-        SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(username, password, credentiallsSalt, getName());
+        ByteSource credentiallsSalt = ByteSource.Util.bytes(username);
+        SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(username, result.toString(), credentiallsSalt, getName());
         return info;
     }
 }

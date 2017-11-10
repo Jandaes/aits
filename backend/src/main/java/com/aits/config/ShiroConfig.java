@@ -51,7 +51,7 @@ public class ShiroConfig {
 	@Bean
 	UserRealm userRealm(EhCacheManager cacheManager,HashedCredentialsMatcher hashedCredentialsMatcher) {
 		UserRealm userRealm = new UserRealm();
-		//userRealm.setCacheManager(cacheManager);
+		userRealm.setCacheManager(cacheManager);
 		userRealm.setCredentialsMatcher(hashedCredentialsMatcher);
 		return userRealm;
 	}
