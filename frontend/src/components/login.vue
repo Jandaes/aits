@@ -63,24 +63,24 @@
 
     },
     methods: {
-      login:function () {
-        if(this.user.username!='' && this.user.password!=''){
+      login: function () {
+        if (this.user.username != '' && this.user.password != '') {
           this.toLogin();
-        }else {
+        } else {
           alert("这块不和谐会改，用户名或密码为空");
         }
       },
-      fetchData(){
+      fetchData() {
         console.log('路由发送变化doing...');
       },
       toLogin: function () {
-      //  let user = this.user;
+        //  let user = this.user;
         var formData = JSON.stringify(this.user);
-          var url = "http://localhost:8999/check";
-          this.$http.post(url,formData).then(response => {
-            this.$router.push('/');
-            this.$router.push('/index');
-        //    this.$router.replace({ path: '/index'})
+        var url = "http://localhost:8999/check";
+        this.$http.post(url, formData).then(response => {
+          this.$router.push('/');
+          this.$router.push('/index');
+          //    this.$router.replace({ path: '/index'})
 //          if(response.data.code == 1){
 //            //如果登录成功则保存登录状态并设置有效期
 //            let expireDays = 1000 * 60 * 60 * 24 * 15;
@@ -92,12 +92,6 @@
           // error callback
         });
       }
-    },
-    watch:{
-      '$route':'fetchData'
-    },
-    mounted (){
-      $('body').resize()
     }
   }
 </script>
