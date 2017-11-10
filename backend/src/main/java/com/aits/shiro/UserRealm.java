@@ -2,10 +2,7 @@ package com.aits.shiro;
 
 import com.aits.entity.User;
 import com.aits.service.UserService;
-import org.apache.shiro.authc.AuthenticationException;
-import org.apache.shiro.authc.AuthenticationInfo;
-import org.apache.shiro.authc.AuthenticationToken;
-import org.apache.shiro.authc.SimpleAuthenticationInfo;
+import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
@@ -46,15 +43,17 @@ public class UserRealm extends AuthorizingRealm {
      * currentUser.login(token);
      * 验证，鉴定
      *
-     * @param token
+     * @param authcToken
      * @return
      * @throws AuthenticationException
      */
     @Override
-    protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
+    protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authcToken) throws AuthenticationException {
+        UsernamePasswordToken token = (UsernamePasswordToken) authcToken;
         String username = (String) token.getPrincipal();
         String password = new String((char[]) token.getCredentials());
-        System.out.println("pass"+password);
+        System.out.println("name:\t"+username);
+        System.out.println("pass:\t"+password);
         User user = new User();
         user.setUsername(username);
         user.setPassword(password);

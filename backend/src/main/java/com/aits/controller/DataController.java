@@ -4,7 +4,6 @@ import com.aits.dao.PersonRepository;
 import com.aits.entity.Person;
 import com.aits.entity.User;
 import com.aits.service.DemoService;
-import com.aits.utils.MD5Utils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
@@ -14,7 +13,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -114,9 +112,14 @@ public class DataController {
      */
     @RequestMapping("/check")
     public String check(@RequestBody User user) {
-        UsernamePasswordToken token = new UsernamePasswordToken(user.getUsername(), user.getPassword());
         Subject subject = SecurityUtils.getSubject();
-        subject.login(token);
+        if(!subject.isAuthenticated()){
+            //没有登录就执行登录
+            UsernamePasswordToken token = new UsernamePasswordToken(user.getUsername(), user.getPassword());
+            subject.login(token);
+        }else{
+            System.out.println("这里是已经登录了");
+        }
         return "success";
     }
 
