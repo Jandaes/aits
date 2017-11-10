@@ -2,10 +2,7 @@ package com.aits.shiro;
 
 import com.aits.entity.User;
 import com.aits.service.UserService;
-import org.apache.shiro.authc.AuthenticationException;
-import org.apache.shiro.authc.AuthenticationInfo;
-import org.apache.shiro.authc.AuthenticationToken;
-import org.apache.shiro.authc.SimpleAuthenticationInfo;
+import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
@@ -53,6 +50,9 @@ public class UserRealm extends AuthorizingRealm {
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
         String username = (String) token.getPrincipal();
+        if(username == null){
+            throw new AccountException("Null usernames are not allowed by this realm.");
+        }
         String password = new String((char[]) token.getCredentials());
         System.out.println("pass"+password);
         User user = new User();
