@@ -492,4 +492,17 @@
   opacity: 0;
 }
 </style>
-<script></script>
+<script>
+  export default {
+    data(){
+
+    },
+    created (){
+
+    },
+    mounted (){
+      $('body').resize()
+    }
+
+  }
+</script>
