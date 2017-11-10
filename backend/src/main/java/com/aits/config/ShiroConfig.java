@@ -20,18 +20,39 @@ import java.util.LinkedHashMap;
  */
 @Configuration
 public class ShiroConfig {
+
+	/**
+	 * 开启shiro注解支持
+	 * @param securityManager
+	 * @return
+	 */
 	@Bean
-	public EhCacheManager getEhCacheManager() {
-		EhCacheManager em = new EhCacheManager();
-	//	em.setCacheManagerConfigFile("classpath:config/ehcache.xml");
-		return em;
+	public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor(
+			@Qualifier("securityManager") SecurityManager securityManager) {
+		AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor = new AuthorizationAttributeSourceAdvisor();
+		authorizationAttributeSourceAdvisor.setSecurityManager(securityManager);
+		return authorizationAttributeSourceAdvisor;
 	}
 
+	/**
+	 * 权限管理器
+	 * @param userRealm
+	 * @return
+	 */
 	@Bean
-	UserRealm userRealm(EhCacheManager cacheManager) {
+	SecurityManager securityManager(UserRealm userRealm) {
+		DefaultWebSecurityManager manager = new DefaultWebSecurityManager();
+		manager.setRealm(userRealm);
+		manager.setCacheManager(getEhCacheManager());
+		return manager;
+	}
+
+
+	@Bean
+	UserRealm userRealm(EhCacheManager cacheManager,HashedCredentialsMatcher hashedCredentialsMatcher) {
 		UserRealm userRealm = new UserRealm();
-		userRealm.setCacheManager(cacheManager);
-		userRealm.setCredentialsMatcher(credentialsMatcher());
+		//userRealm.setCacheManager(cacheManager);
+		userRealm.setCredentialsMatcher(hashedCredentialsMatcher);
 		return userRealm;
 	}
 
@@ -49,19 +70,23 @@ public class ShiroConfig {
 		return hashedCredentialsMatcher;
 	}
 
+
 	@Bean
-	SecurityManager securityManager(UserRealm userRealm) {
-		DefaultWebSecurityManager manager = new DefaultWebSecurityManager();
-		manager.setRealm(userRealm);
-		manager.setCacheManager(getEhCacheManager());
-		return manager;
+	public EhCacheManager getEhCacheManager() {
+		EhCacheManager em = new EhCacheManager();
+	//	em.setCacheManagerConfigFile("classpath:config/ehcache.xml");
+		return em;
 	}
+
+
+
+
 
 	@Bean
 	ShiroFilterFactoryBean shiroFilterFactoryBean(SecurityManager securityManager) {
 		ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
 		shiroFilterFactoryBean.setSecurityManager(securityManager);
-		shiroFilterFactoryBean.setLoginUrl("/**");
+		shiroFilterFactoryBean.setLoginUrl("/check");
 		shiroFilterFactoryBean.setSuccessUrl("/index");
 		shiroFilterFactoryBean.setUnauthorizedUrl("/403");
 		LinkedHashMap<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
@@ -102,12 +127,6 @@ public class ShiroConfig {
 	}
 
 
-	@Bean
-	public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor(
-			@Qualifier("securityManager") SecurityManager securityManager) {
-		AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor = new AuthorizationAttributeSourceAdvisor();
-		authorizationAttributeSourceAdvisor.setSecurityManager(securityManager);
-		return authorizationAttributeSourceAdvisor;
-	}
+
 
 }

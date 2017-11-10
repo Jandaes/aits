@@ -43,18 +43,20 @@ public class UserRealm extends AuthorizingRealm {
      * currentUser.login(token);
      * 验证，鉴定
      *
-     * @param token
+     * @param authcToken
      * @return
      * @throws AuthenticationException
      */
     @Override
-    protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
+    protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authcToken) throws AuthenticationException {
+        UsernamePasswordToken token = (UsernamePasswordToken) authcToken;
         String username = (String) token.getPrincipal();
         if(username == null){
             throw new AccountException("Null usernames are not allowed by this realm.");
         }
         String password = new String((char[]) token.getCredentials());
-        System.out.println("pass"+password);
+        System.out.println("name:\t"+username);
+        System.out.println("pass:\t"+password);
         User user = new User();
         user.setUsername(username);
         user.setPassword(password);
