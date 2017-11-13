@@ -97,39 +97,12 @@ public class ShiroConfig implements EnvironmentAware {
         shiroFilterFactoryBean.setLoginUrl("/check");
         shiroFilterFactoryBean.setSuccessUrl("/**");
         shiroFilterFactoryBean.setUnauthorizedUrl("/403");
-//		LinkedHashMap<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
-//		filterChainDefinitionMap.put("/**", "anon");
-//		filterChainDefinitionMap.put("/bootstrap/**", "anon");
-//		filterChainDefinitionMap.put("/dist/**", "anon");
-//		filterChainDefinitionMap.put("/plugins/**", "anon");
-//		filterChainDefinitionMap.put("/vue/**", "anon");
-//
-//
-//		filterChainDefinitionMap.put("/css/**", "anon");
-//		filterChainDefinitionMap.put("/js/**", "anon");
-//		filterChainDefinitionMap.put("/fonts/**", "anon");
-//		filterChainDefinitionMap.put("/img/**", "anon");
-//		filterChainDefinitionMap.put("/docs/**", "anon");
-//		filterChainDefinitionMap.put("/druid/**", "anon");
-//		filterChainDefinitionMap.put("/upload/**", "anon");
-//		filterChainDefinitionMap.put("/files/**", "anon");
-//		filterChainDefinitionMap.put("/logout", "logout");
-//		filterChainDefinitionMap.put("/", "anon");
-//		filterChainDefinitionMap.put("/blog", "anon");
-//		filterChainDefinitionMap.put("/blog/open/**", "anon");
-//		filterChainDefinitionMap.put("/**", "authc");
-//
-//		shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
-
-
         Map<String, String> chains = Maps.newLinkedHashMap();
         String anonUrls = env.getProperty("shiro.anon.urls");
-        //Preconditions.checkArgument(!StringUtils.isEmpty(anonUrls),"annoUrl must not be empty");
         String[] anonArray = anonUrls.split(",");
         for (String anonUrl : anonArray) {
             chains.put(anonUrl, "anon");
         }
-        //	chains.put("/**", "formLoginFilter,resourceCheckFilter");
         chains.put("/**", "authc");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(chains);
 
