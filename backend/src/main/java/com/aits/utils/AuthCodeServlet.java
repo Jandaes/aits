@@ -17,7 +17,7 @@ import java.util.Random;
  * @author Jared
  * 验证码生成
  */
-@WebServlet(name = "authCodeServlet",urlPatterns = "/authCode")
+@WebServlet(name = "authCodeServlet", urlPatterns = "/authCode")
 public class AuthCodeServlet extends HttpServlet {
 
     /**
@@ -53,11 +53,26 @@ public class AuthCodeServlet extends HttpServlet {
      * 备选字体个数
      */
     private static final int FONT_TYPES_LEN = FONT_TYPES.length;
-    private int width; // 验证码图片的宽度
-    private int height; // 验证码图片的高度
-    private int codeCount; // 验证码字符个数
-    private int lineCount; // 随机干扰线条数
-    private int pointCount; // 随机干扰点数
+    /**
+     * 验证码图片的宽度
+     */
+    private int width;
+    /**
+     * 验证码图片的高度
+     */
+    private int height;
+    /**
+     * 验证码字符个数
+     */
+    private int codeCount;
+    /**
+     * 随机干扰线条数
+     */
+    private int lineCount;
+    /**
+     *  随机干扰点数
+     */
+    private int pointCount;
     private String randomString = RANDOM_STRING;
     private int randomStringLength = RANDOM_STRING.length();
     private Random random = new Random();
@@ -123,7 +138,7 @@ public class AuthCodeServlet extends HttpServlet {
         }
 
         //验证码放置
-        UserContextUtil.setAttribute(UserContextUtil.AUTH_CODE_KEY,buffer.toString( ));
+        UserContextUtil.setAttribute(UserContextUtil.AUTH_CODE_KEY, buffer.toString());
         g.dispose();
 
         response.setHeader("Cache-Control", "no-cache");
