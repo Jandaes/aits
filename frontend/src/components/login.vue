@@ -78,8 +78,14 @@
         var formData = JSON.stringify(this.user);
         var url = "http://localhost:8999/check";
         this.$http.post(url, formData).then(response => {
-          this.$router.push('/');
-          this.$router.push('/index');
+        // alert(data);
+          alert(response.data);
+          if(response.data == null){
+            this.$router.push('/');
+            this.$router.push('/index');
+          }else{
+            alert("用户名密码错误");
+          }
           //    this.$router.replace({ path: '/index'})
 //          if(response.data.code == 1){
 //            //如果登录成功则保存登录状态并设置有效期
