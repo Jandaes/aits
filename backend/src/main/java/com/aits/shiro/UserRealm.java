@@ -12,6 +12,7 @@ import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.servlet.http.HttpSession;
 import java.util.*;
 
 @Component
@@ -67,6 +68,7 @@ public class UserRealm extends AuthorizingRealm {
             if (!user.getUsername().equals(username)){
                 throw new UnknownAccountException("帐号或密码错误");
             }
+
         }else {
             throw new UnknownAccountException("用户不存在");
         }

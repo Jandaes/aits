@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /**
@@ -111,7 +112,7 @@ public class DataController {
      * @return
      */
     @RequestMapping("/check")
-    public String check(@RequestBody User user) {
+    public String check(@RequestBody User user, HttpSession session) {
         Subject subject = SecurityUtils.getSubject();
         if(!subject.isAuthenticated()){
             //没有登录就执行登录

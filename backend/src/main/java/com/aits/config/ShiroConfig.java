@@ -1,14 +1,18 @@
 package com.aits.config;
 
+import com.aits.dao.RedisSessionDao;
 import com.aits.shiro.UserRealm;
+import com.aits.utils.RedisCacheManager;
 import com.google.common.collect.Maps;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.mgt.SecurityManager;
+import org.apache.shiro.session.mgt.SessionManager;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
+import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -17,6 +21,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 
+import javax.annotation.Resource;
 import java.util.Map;
 
 /**
@@ -27,6 +32,9 @@ public class ShiroConfig implements EnvironmentAware {
     private Environment env;
     @Value("${ shiro.anon.urls }")
     private String anonUrls;
+
+    @Resource
+    private RedisSessionDao sessionDAO;
 
     /**
      * 开启shiro注解支持
@@ -89,13 +97,26 @@ public class ShiroConfig implements EnvironmentAware {
         return em;
     }
 
+    @Bean
+    public RedisCacheManager redisCacheManager() {
+        return new RedisCacheManager();
+    }
+
+    @Bean
+    public SessionManager sessionManager() {
+        DefaultWebSessionManager sessionManager = new DefaultWebSessionManager();
+        sessionManager.setSessionDAO(sessionDAO);
+        sessionManager.setGlobalSessionTimeout(1800);
+        sessionManager.setCacheManager(redisCacheManager());
+        return sessionManager;
+    }
 
     @Bean
     ShiroFilterFactoryBean shiroFilterFactoryBean(SecurityManager securityManager) {
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
         shiroFilterFactoryBean.setSecurityManager(securityManager);
         shiroFilterFactoryBean.setLoginUrl("/check");
-        shiroFilterFactoryBean.setSuccessUrl("/**");
+        shiroFilterFactoryBean.setSuccessUrl("/index");
         shiroFilterFactoryBean.setUnauthorizedUrl("/403");
         Map<String, String> chains = Maps.newLinkedHashMap();
         String anonUrls = env.getProperty("shiro.anon.urls");
