@@ -1,23 +1,22 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import VueResource from 'vue-resource'
 // import HelloWorld from '@/components/HelloWorld'
 import index from '@/components/index'
+import login from '@/components/login'
 import deviceCatalog from '@/components/catalog'
 import deviceCatalog2 from '@/components/catalog2'
 import general from '@/components/forms/general'
-import ticketInfo from '@/components/forms/ticketInfo'
 import person from '@/components/forms/person'
-import login from '@/components/login'
+import ticketInfo from '@/components/forms/ticketInfo'
+import VueResource from 'vue-resource'
 
-// 导入定义路由
 Vue.use(Router)
 Vue.use(VueResource)
 
 export default new Router({
   routes: [
     {
-      path: '/login',
+      path: '/',
       name: 'login',
       component: login
     }, {
@@ -42,4 +41,4 @@ export default new Router({
       }]
     }
   ]
-})
+});

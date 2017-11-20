@@ -1,5 +1,5 @@
 
-'use strict'
+//'use strict'
 // Template version: 1.1.1
 // see http://vuejs-templates.github.io/webpack for documentation.
 
@@ -11,7 +11,7 @@ module.exports = {
     index: path.resolve(__dirname, '../target/dist/index.html'),
     assetsRoot: path.resolve(__dirname, '../target/dist'),
     assetsSubDirectory: 'static',
-    assetsPublicPath: '/',
+    assetsPublicPath: './',
     productionSourceMap: true,
     // Gzip off by default as many popular static hosts such as
     // Surge or Netlify already gzip all static assets for you.
