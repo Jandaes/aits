@@ -39,4 +39,6 @@ backend/src/main/resources/public
 backend/src/test
 backend/target/
 
+# logs不受控制
+logs
 
