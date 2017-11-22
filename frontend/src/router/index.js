@@ -8,10 +8,13 @@ import deviceCatalog2 from '@/components/catalog2'
 import general from '@/components/forms/general'
 import person from '@/components/forms/person'
 import ticketInfo from '@/components/forms/ticketInfo'
+import amap from '@/components/map/amap'
 import VueResource from 'vue-resource'
 
 Vue.use(Router)
 Vue.use(VueResource)
+
+
 
 export default new Router({
   routes: [
@@ -38,6 +41,9 @@ export default new Router({
       }, {
         path: '/person',
         component: person
+      }, {
+        path: '/map',
+        component: amap
       }]
     }
   ]

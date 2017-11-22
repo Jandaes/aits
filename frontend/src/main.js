@@ -2,6 +2,7 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import App from './App'
+import VueAMap from 'vue-amap';
 import router from './router'
 // Bootstrap 3.3.6
 import '../bootstrap/css/bootstrap.css'
@@ -30,6 +31,14 @@ import '../assets/js/stomp.min.js'
 
 //import '../node_modules/lodash/lodash'
 
+/* 全局引入AMap插件 */
+Vue.use(VueAMap);
+
+/* 初始化AMap插件配置 */
+VueAMap.initAMapApiLoader({
+  key: 'YOUR_KEY',
+  plugin: ['AMap.Scale', 'AMap.OverView', 'AMap.ToolBar', 'AMap.MapType']
+});
 
 Vue.config.productionTip = false
 
