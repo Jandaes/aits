@@ -502,12 +502,6 @@
 </style>
 <script>
   export default {
-    data(){
-
-    },
-    created (){
-
-    },
     mounted (){
       $('body').resize()
     }

@@ -76,10 +76,10 @@
       toLogin: function () {
         //  let user = this.user;
         var formData = JSON.stringify(this.user);
-        var url = "http://localhost:8999/check";
+        var url = "http://www.jared73.com:8999/check";
         this.$http.post(url, formData).then(response => {
         // alert(data);
-          alert(response.data);
+         // alert(response.data);
           if(response.data == null){
             this.$router.push('/');
             this.$router.push('/index');
