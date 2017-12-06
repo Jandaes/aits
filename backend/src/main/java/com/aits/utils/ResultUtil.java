@@ -1,10 +1,15 @@
 package com.aits.utils;
 
 import com.aits.entity.Result;
+import com.aits.enums.ResultEnum;
 
 /**
  * 返回数据工具类
- * Created by D.Yang on 2017/11/13 0013.
+ * <p>
+ *     统一返回JSON类型
+ * </p>
+ * @author D.Yang
+ * @date 2017/11/13 0013
  */
 public class ResultUtil {
 
@@ -48,5 +53,17 @@ public class ResultUtil {
      */
     public static Result error(){
         return error(null,null);
+    }
+
+    /**
+     * 返回错误,枚举参数
+     * @param resultEnum 枚举消息
+     * @return
+     */
+    public static Result error(ResultEnum resultEnum){
+        Result result = new Result();
+        result.setCode(resultEnum.getCode());
+        result.setMsg(resultEnum.getMsg());
+        return result;
     }
 }

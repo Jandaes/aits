@@ -1,6 +1,7 @@
 package com.aits.handle;
 
 import com.aits.entity.Result;
+import com.aits.enums.ResultEnum;
 import com.aits.utils.ResultUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,13 +27,20 @@ public class ExceptionHandle {
 
     /**
      * 捕获Exception 异常
-     * @param e 异常信息
+     * @param ex 异常信息
      * @return
      */
-    @ExceptionHandler(value = Exception.class)
     @ResponseBody
-    public Result handle(Exception e){
-        logger.error("【系统异常】{}",e);
-        return ResultUtil.error(300,e.getMessage());
+    @ExceptionHandler(value = Exception.class)
+    public Result handle(Exception ex){
+        /*自定义AitsSystemException异常,如有更多自定义异常可追加判断*/
+        if(ex instanceof AitsSystemException){
+            logger.error("【AitsSystemException 异常消息：】",ex);
+            AitsSystemException aitsSystemException = (AitsSystemException)ex;
+            return ResultUtil.error(aitsSystemException.getCode(),aitsSystemException.getMessage());
+        }else {
+            logger.error("【JDK 异常】",ex);
+            return ResultUtil.error(ResultEnum.UNKONW_ERROR);
+        }
     }
 }
