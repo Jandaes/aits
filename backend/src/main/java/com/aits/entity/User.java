@@ -50,7 +50,7 @@ public class User {
     /**
      * 用户邮箱
      */
-    @Email(regexp = ".@",message = "请输入正确的邮箱")
+    @Email(regexp = "^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\\.[a-zA-Z0-9_-]+)+$",message = "请输入正确的邮箱")
     private String email;
     /**
      * 用户所属公司
