@@ -20,8 +20,8 @@ public class ResultUtil {
      */
     public static Result success(Object obj){
         Result result = new Result();
-        result.setCode(200);
-        result.setMsg("成功");
+        result.setCode(ResultEnum.SUCCESS.getCode());
+        result.setMsg(ResultEnum.SUCCESS.getMsg());
         result.setData(obj);
         return result;
     }
@@ -52,7 +52,7 @@ public class ResultUtil {
      * @return
      */
     public static Result error(){
-        return error(null,null);
+        return error(ResultEnum.ERROR.getCode(),ResultEnum.ERROR.getMsg());
     }
 
     /**

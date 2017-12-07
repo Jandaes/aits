@@ -75,12 +75,13 @@
       },
       toLogin: function () {
         //  let user = this.user;
-        var formData = JSON.stringify(this.user);
-        var url = "http://www.jared73.com:8999/check";
+        var formData = JSON.stringify(this.user); 
+        var url = "http://localhost:8999/login";
         this.$http.post(url, formData).then(response => {
+          console.info(response);
         // alert(data);
          // alert(response.data);
-          if(response.data == null){
+          if(response.data.code == 200){
             this.$router.push('/');
             this.$router.push('/index');
           }else{

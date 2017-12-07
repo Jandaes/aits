@@ -2,20 +2,14 @@ package com.aits.controller;
 
 import com.aits.dao.PersonRepository;
 import com.aits.entity.Person;
-import com.aits.entity.User;
 import com.aits.service.DemoService;
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.UsernamePasswordToken;
-import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /**
@@ -23,7 +17,9 @@ import java.util.List;
  */
 @RestController
 public class DataController {
-    //springData Jpa已自动注入bean
+    /**
+     * springData Jpa已自动注入bean
+     */
     @Autowired
     PersonRepository personRepository;
     @Autowired
@@ -55,7 +51,10 @@ public class DataController {
         return people;
     }
 
-    //------------------测试分页、排序
+    /**
+     * 测试分页、排序
+     * @return
+     */
     @RequestMapping("/page")
     public Page<Person> page() {
         Page<Person> pagePeople = personRepository.findAll(new PageRequest(1, 2));
@@ -70,7 +69,6 @@ public class DataController {
 
     /**
      * 缓存测试，查询此方法，若sql只执行一次，则缓存生效
-     *
      * @param id
      * @return
      */
@@ -84,7 +82,6 @@ public class DataController {
 
     /**
      * 测试事物回滚：http://localhost:8999/rollback?name=73&age=50
-     *
      * @param person
      * @return
      */
@@ -95,7 +92,6 @@ public class DataController {
 
     /**
      * 测试事物不回滚：http://localhost:8999/norollback?name=73&age=50
-     *
      * @param person
      * @return
      */
@@ -104,24 +100,6 @@ public class DataController {
         return demoService.savePersonWithoutRollBack(person);
     }
 
-    /**
-     * shiro校验登录
-     *
-     * @param
-     * @param
-     * @return
-     */
-    @RequestMapping("/check")
-    public String check(@RequestBody User user, HttpSession session) {
-        Subject subject = SecurityUtils.getSubject();
-        if(!subject.isAuthenticated()){
-            //没有登录就执行登录
-            UsernamePasswordToken token = new UsernamePasswordToken(user.getUsername(), user.getPassword());
-            subject.login(token);
-        }else{
-            System.out.println("这里是已经登录了");
-        }
-        return "success";
-    }
+
 
 }

@@ -1,20 +1,25 @@
 package com.aits.shiro;
 
 import com.aits.entity.User;
+import com.aits.enums.ResultEnum;
+import com.aits.handle.AitsSystemException;
 import com.aits.service.UserService;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
-import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.servlet.http.HttpSession;
-import java.util.*;
+import java.util.HashSet;
+import java.util.Set;
 
+/**
+ * 自定义Realm 、验证、授权
+ * @author 73大佬手札
+ */
 @Component
 public class UserRealm extends AuthorizingRealm {
     @Autowired
@@ -52,30 +57,29 @@ public class UserRealm extends AuthorizingRealm {
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authcToken) throws AuthenticationException {
         UsernamePasswordToken token = (UsernamePasswordToken) authcToken;
+        /*获取LoginController中UsernamePasswordToken*/
         String username = (String) token.getPrincipal();
         if(username == null){
-            throw new AccountException("Null usernames are not allowed by this realm.");
+            /*帐号不存在*/
+            throw new AitsSystemException(ResultEnum.UNKNOWN_ACCOUNT_ERROE);
         }
-        String password = new String((char[]) token.getCredentials());
-        Object result = new SimpleHash("MD5", password,username, 1024);
         User user = new User();
         user.setUsername(username);
-        user.setPassword(result.toString());
-        List<User> list = userService.findByUsernameAndPassword(user);
-        user = new User();
-        if(list.size()>0){
-            user = list.get(0);
-            if (!user.getUsername().equals(username)){
-                throw new UnknownAccountException("帐号或密码错误");
-            }
-
+        /*查询帐号*/
+        User userResult = userService.findByUsernameAndPassword(user);
+        if(userResult == null){
+            throw new AitsSystemException(ResultEnum.UNKNOWN_ACCOUNT_ERROE);
         }else {
-            throw new UnknownAccountException("用户不存在");
+            if(!username.equals(userResult.getUsername())){
+                throw new AitsSystemException(ResultEnum.UNKNOWN_ACCOUNT_ERROE);
+            }
+            if(userResult.getStatus() == 0){
+                throw new AitsSystemException(ResultEnum.LOCKED_ACCOUNT_ERROR);
+            }
         }
-
-        //盐值加密
-        ByteSource credentiallsSalt = ByteSource.Util.bytes(username);
-        SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(username, result.toString(), credentiallsSalt, getName());
+        /*盐值加密*/
+        ByteSource credentiallsSalt = ByteSource.Util.bytes(userResult.getUsername());
+        SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(userResult,userResult.getPassword(),credentiallsSalt,getName());
         return info;
     }
 }
