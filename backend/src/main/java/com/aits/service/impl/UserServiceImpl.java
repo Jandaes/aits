@@ -6,15 +6,22 @@ import com.aits.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
+/**
+ *
+ * @author 73大佬
+ */
 @Service
 public class UserServiceImpl implements UserService{
     @Autowired
     UserRepository userRepository;
 
     @Override
-    public List<User> findByUsernameAndPassword(User user) {
+    public User findByUsernameAndPassword(User user) {
         return userRepository.findByUsernameAndPassword(user.getUsername(),user.getPassword());
+    }
+
+    @Override
+    public void save(User user) {
+        userRepository.save(user);
     }
 }

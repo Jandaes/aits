@@ -2,11 +2,21 @@ package com.aits.service;
 
 import com.aits.entity.User;
 
-import java.util.List;
-
 /**
  * @author jared
  */
 public interface UserService {
-    public List<User> findByUsernameAndPassword(User user);
+    /**
+     * 根据帐号密码查询用户<br/>
+     * 要保持数据库帐号唯一性
+     * @param user
+     * @return
+     */
+    User findByUsernameAndPassword(User user);
+
+    /**
+     * 添加用户
+     * @param user
+     */
+    void save(User user);
 }
