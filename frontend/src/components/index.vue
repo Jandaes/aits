@@ -255,8 +255,43 @@
                   </span>
                 </router-link>
               </li>
+              <li class="treeview">
+                <a href="#">
+                  <i class="fa fa-dashboard"></i> <span>权限管理</span>
+                  <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                  </span>
+                </a>
+                <ul class="treeview-menu">
+                  <!-- 路由导航 -->
+                  <li>
+                    <router-link to="/role">
+                      <i class="fa fa-circle-o"></i>角色列表
+                    </router-link>
+                  </li>
+                  <li>
+                    <router-link to="/deviceCatalog2">
+                      <i class="fa fa-circle-o"></i> 角色分配
+                    </router-link>
+                  </li>
+                  <li>
+                    <router-link to="/deviceCatalog2">
+                      <i class="fa fa-circle-o"></i> 权限列表
+                    </router-link>
+                  </li>
+                  <li>
+                    <router-link to="/deviceCatalog2">
+                      <i class="fa fa-circle-o"></i> 权限分配
+                    </router-link>
+                  </li>
+                </ul>
+              </li>
               <li class="header">LABELS</li>
-              <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
+              <li>
+                <router-link to="/forbidden">
+                  <i class="fa fa-circle-o text-red"></i> <span>无权限页面</span>
+                </router-link>
+              </li>
               <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>
               <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a></li>
             </ul>
