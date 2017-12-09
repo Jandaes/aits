@@ -60,7 +60,7 @@ public class ShiroConfig implements EnvironmentAware {
     SecurityManager securityManager(UserRealm userRealm) {
         DefaultWebSecurityManager manager = new DefaultWebSecurityManager();
         manager.setRealm(userRealm);
-//		<!-- 用户授权/认证信息Cache, 采用EhCache 缓存 -->
+        /*用户授权/认证信息Cache, 采用EhCache 缓存*/
         manager.setCacheManager(getEhCacheManager());
         return manager;
     }
@@ -82,9 +82,9 @@ public class ShiroConfig implements EnvironmentAware {
     @Bean
     HashedCredentialsMatcher credentialsMatcher() {
         HashedCredentialsMatcher hashedCredentialsMatcher = new HashedCredentialsMatcher();
-        //加密方式
+        /*加密方式*/
         hashedCredentialsMatcher.setHashAlgorithmName("MD5");
-        //加密次数
+        /*加密次数*/
         hashedCredentialsMatcher.setHashIterations(1024);
         return hashedCredentialsMatcher;
     }
@@ -115,19 +115,28 @@ public class ShiroConfig implements EnvironmentAware {
     ShiroFilterFactoryBean shiroFilterFactoryBean(SecurityManager securityManager) {
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
         shiroFilterFactoryBean.setSecurityManager(securityManager);
-        shiroFilterFactoryBean.setLoginUrl("/check");
-        shiroFilterFactoryBean.setSuccessUrl("/index");
-        shiroFilterFactoryBean.setUnauthorizedUrl("/403");
+        /*成功页面、暂不处理*/
+        //shiroFilterFactoryBean.setSuccessUrl("/indexxxx");
+
+        shiroFilterFactoryBean.setLoginUrl("/unlogin");
+        shiroFilterFactoryBean.setUnauthorizedUrl("/forbidden");
+
         Map<String, String> chains = Maps.newLinkedHashMap();
+        /*下面两行默认不写、就是anon*/
+        //chains.put("/forbidden", "anon");
+        //chains.put("/unlog", "anon");
+
+
+        /*此行代码测试是否有登录，然后跳转到登录页面*/
+        //chains.put("/role/list", "authc");
+        /*此行代码设置是否有权限，测试时与上行代码切换调试*/
+        chains.put("/role/list", "perms[role:list]");
         String anonUrls = env.getProperty("shiro.anon.urls");
         String[] anonArray = anonUrls.split(",");
         for (String anonUrl : anonArray) {
             chains.put(anonUrl, "anon");
         }
-        chains.put("/**", "authc");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(chains);
-
-
         return shiroFilterFactoryBean;
     }
 
