@@ -14,7 +14,7 @@ import java.util.Date;
  * 左侧菜单管理
  */
 @Data
-@Entity
+@Entity(name = "menu")
 @AllArgsConstructor
 @NoArgsConstructor
 public class Menu {

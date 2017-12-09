@@ -15,7 +15,7 @@ import java.util.Date;
  * 后台管理人员角色信息
  */
 @Data
-@Entity
+@Entity(name = "role")
 @AllArgsConstructor
 @NoArgsConstructor
 public class Role implements Serializable{

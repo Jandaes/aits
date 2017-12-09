@@ -14,7 +14,7 @@ import java.io.Serializable;
  * 菜单角色关系表
  */
 @Data
-@Entity
+@Entity(name = "role_menu")
 @AllArgsConstructor
 @NoArgsConstructor
 public class RoleMenu implements Serializable{

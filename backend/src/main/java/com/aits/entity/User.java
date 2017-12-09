@@ -17,7 +17,7 @@ import java.io.Serializable;
  * 后台管理人员信息
  */
 @Data
-@Entity
+@Entity(name = "user")
 @AllArgsConstructor
 @NoArgsConstructor
 public class User implements Serializable{
