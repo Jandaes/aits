@@ -2,16 +2,14 @@ package com.aits.controller;
 
 import com.aits.entity.Result;
 import com.aits.entity.User;
+import com.aits.enums.ResultEnum;
 import com.aits.handle.AitsSystemException;
 import com.aits.utils.ResultUtil;
 import org.apache.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * 登录控制类
@@ -47,5 +45,25 @@ public class LoginController extends BaseController{
             logger.info("已经登录过了,跳转至首页");
             return ResultUtil.success();
         }
+    }
+
+    /**
+     * 未登陆跳转到这里
+     * @return
+     */
+    @RequestMapping(value = "/unlogin",method = RequestMethod.GET)
+    public void unLogin(){
+        logger.info("请先登录");
+        throw new AitsSystemException(ResultEnum.NOT_LOGGED_IN_ERROR);
+    }
+
+    /**
+     * 未授权将会跳转到这里执行
+     * @return
+     */
+    @RequestMapping(value = "/forbidden",method = RequestMethod.GET)
+    public void unauthorizedUrl(){
+        logger.info("无权限操作");
+        throw new AitsSystemException(ResultEnum.FORBIDDEN_ERROR);
     }
 }
