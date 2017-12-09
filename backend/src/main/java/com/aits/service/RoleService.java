@@ -13,4 +13,11 @@ public interface RoleService{
 
     List<Role> findAll();
     Role save(Role role);
+
+    /**
+     * 根据用户编号、查询对应的所有角色
+     * @param id
+     * @return
+     */
+    //List<Role> queryUserRolesByUid(Long id);
 }

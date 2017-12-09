@@ -23,7 +23,13 @@ public class RoleServiceImpl implements RoleService {
         return roleRepository.findAll();
     }
 
+    @Override
     public Role save(Role role){
         return roleRepository.save(role);
     }
+
+   /* @Override
+    public List<Role> queryUserRolesByUid(Long id) {
+        return roleRepository.queryUserRolesByUid(id);
+    }*/
 }
