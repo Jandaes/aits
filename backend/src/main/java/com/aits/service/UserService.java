@@ -19,4 +19,11 @@ public interface UserService {
      * @param user
      */
     void save(User user);
+
+    /**
+     * 根据帐号查询
+     * @param username
+     * @return
+     */
+    User findByUsername(String username);
 }

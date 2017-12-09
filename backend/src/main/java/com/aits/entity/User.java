@@ -10,16 +10,17 @@ import org.hibernate.validator.constraints.NotEmpty;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.io.Serializable;
 
 /**
  * @author jared
  * 后台管理人员信息
  */
 @Data
+@Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
-public class User {
+public class User implements Serializable{
     /**
      * 用户id<br/>
      * 指明这个属性映射为数据库的主键<br/>
