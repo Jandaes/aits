@@ -26,7 +26,10 @@ public enum ResultEnum {
     ERROR(201,"错误"),
 
 
-
+    /**
+     * 无权限操作
+     */
+    FORBIDDEN_ERROR(403,"无权限操作"),
     /**
      * 帐号异常
      */
@@ -55,6 +58,11 @@ public enum ResultEnum {
      * 错误的凭据
      */
     INCORRECT_CREDENTIALS_ERROR(10006,"错误的凭据"),
+    /**
+     * 未登录
+     */
+    NOT_LOGGED_IN_ERROR(10007,"未登录"),
+
 
     ;
 
