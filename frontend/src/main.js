@@ -32,6 +32,8 @@ import '../assets/js/stomp.min.js'
 
 import VueAMap from 'vue-amap';
 import { lazyAMapApiLoaderInstance } from 'vue-amap';
+import axios from 'axios'
+
 
 Vue.use(VueAMap);
 VueAMap.initAMapApiLoader({
@@ -45,16 +47,11 @@ lazyAMapApiLoaderInstance.load().then(() => {
     center: new AMap.LngLat(121.59996, 31.197646)
   });
 });
+Vue.prototype.axios = axios;
+axios.defaults.withCredentials=true;
 
 
-
-
-
-
-
-
-
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
 
 /* eslint-disable no-new */
 new Vue({

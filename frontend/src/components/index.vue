@@ -536,7 +536,41 @@
 }
 </style>
 <script>
+  import {getCookie,setCookie} from '../utils/cookieUtil'
   export default {
+    created (){
+        this.login();
+    },
+    methods: {
+      login: function () {
+        const url = "http://127.0.0.1:8999/role/list";
+        this.$http.get(url+"?token="+this.$route.query.sessionId).then(response => {
+          var obj = response.body;
+          if(obj.code == 200){
+            this.roles = obj.data;
+          }else if(obj.code == 403){
+            this.$router.push('/');
+            this.$router.push('/');
+            /*这里是无权限操作*/
+            alert("未授权，非法操作");
+          }else if(obj.code == -1){
+            this.$router.push('/');
+            this.$router.push('/');
+            confirm("帐号密码未授权")
+          }
+          else if(obj.code == 10007){
+            /*这里是未登录*/
+            if(confirm("老铁、去登录吧")){
+              this.$router.push('/');
+              this.$router.push('/');
+            }else{
+              alert("你不登录咋看a");
+            }
+          }
+          console.info(this.roles);
+        });
+      }
+    },
     mounted (){
       $('body').resize()
     }

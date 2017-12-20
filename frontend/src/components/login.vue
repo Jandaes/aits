@@ -50,6 +50,8 @@
   </html>
 </template>
 <script>
+  //let axios = require('axios');
+  import {getCookie,setCookie} from '../utils/cookieUtil'
   export default{
     data() {
       return {
@@ -74,29 +76,22 @@
         console.log('路由发送变化doing...');
       },
       toLogin: function () {
-        //  let user = this.user;
-        var formData = JSON.stringify(this.user); 
+        var formData = JSON.stringify(this.user);
         var url = "http://localhost:8999/login";
-        this.$http.post(url, formData).then(response => {
-          console.info(response);
-        // alert(data);
-         // alert(response.data);
+        this.axios.post(url, formData, {
+          headers: {
+            "Content-Type": "application/json;charset=utf-8",
+          }
+        }).then(function(response) {
           if(response.data.code == 200){
-            this.$router.push('/');
-            this.$router.push('/index');
+            this.$router.push({path:'/index',query:{sessionId:response.data.sessionId}});
           }else{
             alert("用户名密码错误");
           }
-          //    this.$router.replace({ path: '/index'})
-//          if(response.data.code == 1){
-//            //如果登录成功则保存登录状态并设置有效期
-//            let expireDays = 1000 * 60 * 60 * 24 * 15;
-//            this.setCookie('session', response.data.session, expireDays);
-//            //跳转
-//            this.$router.push('/user_info');
-//          }
-        }, response => {
-          // error callback
+          //这两个回调函数都有各自独立的作用域，如果直接在里面访问 this，无法访问到 Vue 实例,这时只要添加一个 .bind(this) 就能解决这个问题
+        }.bind(this)).catch(function(response) {
+          // 这里是处理错误的回调
+          console.log(response)
         });
       }
     }
