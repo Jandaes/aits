@@ -25,4 +25,6 @@ public class Result<T> {
      * 具体返回数据
      */
     private T data;
+
+    private String sessionId;
 }

@@ -118,7 +118,7 @@ public class ShiroConfig implements EnvironmentAware {
         /*成功页面、暂不处理*/
         //shiroFilterFactoryBean.setSuccessUrl("/indexxxx");
 
-        shiroFilterFactoryBean.setLoginUrl("/unlogin");
+        shiroFilterFactoryBean.setLoginUrl("/role/list");
         shiroFilterFactoryBean.setUnauthorizedUrl("/forbidden");
 
         Map<String, String> chains = Maps.newLinkedHashMap();
@@ -136,6 +136,7 @@ public class ShiroConfig implements EnvironmentAware {
         for (String anonUrl : anonArray) {
             chains.put(anonUrl, "anon");
         }
+        chains.put("/logout", "logout");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(chains);
         return shiroFilterFactoryBean;
     }

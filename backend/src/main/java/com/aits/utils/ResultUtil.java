@@ -35,6 +35,27 @@ public class ResultUtil {
     }
 
     /**
+     * 返回成功不带参数
+     * @return
+     */
+    public static Result Cookiesuccess(String session){
+        return Cookiesuccess(null,session);
+    }
+    /**
+     * 成功返回数据
+     * @param obj
+     * @return
+     */
+    public static Result Cookiesuccess(Object obj,String session){
+        Result result = new Result();
+        result.setCode(ResultEnum.SUCCESS.getCode());
+        result.setMsg(ResultEnum.SUCCESS.getMsg());
+        result.setData(obj);
+        result.setSessionId(session);
+        return result;
+    }
+
+    /**
      * 返回错误
      * @param code 错误代码
      * @param msg 错误信息

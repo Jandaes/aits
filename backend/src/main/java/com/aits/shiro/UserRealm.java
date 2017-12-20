@@ -59,6 +59,11 @@ public class UserRealm extends AuthorizingRealm {
             设置权限、同
             chains.put("/role/list", "perms[role:list]")
             一起使用
+
+            说明有这个权限了
+
+
+            这个是说这个用户有这个权限、你哪里不管登录不登陆应该和这个都没有影响的
         */
         perms.add("role:list");
 
