@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * 需要config配置类配合，看config目录
+ * 路径只有走DispatcherServlet，才会被拦截，默认静态资源不会被拦截
+ * @author jared
  */
 public class MyInterceptor implements HandlerInterceptor{
     @Override
