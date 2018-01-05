@@ -1,0 +1,19 @@
+#客户端
+server:
+  port: 8001
+#eureka:
+#  server:
+#    enableSelfPreservation: false
+#    evictionIntervalTimerInMs: 4000
+#  client:
+#    serviceUrl:
+#      defaultZone: http://user:123@localhost:8761/eureka/    # 指定注册中心的地址
+# #     defaultZone: http://user:123@192.168.26.111:8761/eureka/    # 指定注册中心的地址
+#  instance:
+#    preferIpAddress: true
+#    leaseRenewalIntervalInSeconds: 10
+#    leaseExpirationDurationInSeconds: 30
+#  #  hostname: localhost
+#spring:
+#  application:
+#    name: userservice-consumer-feign

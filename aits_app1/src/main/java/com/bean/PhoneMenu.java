@@ -1,4 +1,4 @@
-package bean;
+package com.bean;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,7 +17,7 @@ public class PhoneMenu {
      * 菜品id
      */
     @Id
-    @GeneratedValue
+   // @GeneratedValue
     private String pmenuId;
     /**
      * 菜的数量

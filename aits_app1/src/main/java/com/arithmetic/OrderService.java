@@ -1,10 +1,10 @@
-package arithmetic;
+package com.arithmetic;
 
-import bean.BMenu;
-import bean.BOrder;
+import com.bean.BMenu;
+import com.bean.BOrder;
 
-import bean.PhoneMenu;
-import bean.ShipInfo;
+import com.bean.PhoneMenu;
+import com.bean.ShipInfo;
 
 import java.util.ArrayList;
 import java.util.List;

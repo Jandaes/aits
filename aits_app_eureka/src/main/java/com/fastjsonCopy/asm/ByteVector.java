@@ -1,7 +1,4 @@
-package fastjsonCopy.asm;
-
-import java.util.ArrayList;
-import java.util.List;
+package com.fastjsonCopy.asm;
 
 /**
  * @author jared

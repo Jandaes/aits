@@ -1,4 +1,4 @@
-package bean;
+package com.bean;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,7 +20,7 @@ public class BMenu {
      * 菜品id
      */
     @Id
-    @GeneratedValue
+ //   @GeneratedValue
     private String bMenuId;
     /**
      * 菜品名称
