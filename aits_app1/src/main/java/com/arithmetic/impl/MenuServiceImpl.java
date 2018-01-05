@@ -21,7 +21,7 @@ public class MenuServiceImpl implements MenuService {
     @Override
     public ShipMessage getShipMessageByNo(String shipNo) {
         ShipMessage shipMessage = new ShipMessage();
-        List<BMenu> list= bMenuRepository.findByBShipNo("7");
+        List<BMenu> list= bMenuRepository.findByBShipNo(shipNo);
         ShipInfo shipInfo=shipInfoService.getShipInfoByShipNo(shipNo);
         shipMessage.setMenuList(list);
         shipMessage.setAddress(shipInfo.getAddress());

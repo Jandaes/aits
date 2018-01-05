@@ -33,9 +33,9 @@ public class ShipInfo {
     private String icoPath;
 
     /**
-     * 展示店铺信息如，外景、内景，主要菜品
+     * 展示店铺信息如，外景、内景，主要菜品,多张图用逗号隔开
      */
-    private String[] showImgPath;
+    private String showImgPath;
 
 
 

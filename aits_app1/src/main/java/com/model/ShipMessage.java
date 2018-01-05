@@ -36,7 +36,7 @@ public class ShipMessage {
     /**
      * 展示店铺信息如，外景、内景，主要菜品
      */
-    private String[] showImgPath;
+    private String showImgPath;
     /**
      * 根据店铺id返回的所有店铺相关菜品
      */
