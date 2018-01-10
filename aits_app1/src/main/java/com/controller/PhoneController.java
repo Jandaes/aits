@@ -18,7 +18,7 @@ public class PhoneController {
     @RequestMapping("/getShipInfo")
     public ShipMessage getShipInfo(String shipNo){
         System.out.println("hello");
-        ShipMessage shipMessage=menuService.getShipMessageByNo("");
+        ShipMessage shipMessage=menuService.getShipMessageByNo(shipNo);
         return shipMessage;
     }
 
