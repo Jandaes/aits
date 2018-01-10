@@ -40,7 +40,7 @@ public class ShipMessage {
     /**
      * 根据店铺id返回的所有店铺相关菜品
      */
-    private List<BMenu> menuList;
+    private List<FMenuType> fMenuTypes;
 
 
 }

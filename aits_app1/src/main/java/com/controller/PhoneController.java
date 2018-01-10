@@ -1,6 +1,7 @@
 package com.controller;
 
 import com.arithmetic.MenuService;
+import com.model.FMenuType;
 import com.model.ShipMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,9 +18,13 @@ public class PhoneController {
      */
     @RequestMapping("/getShipInfo")
     public ShipMessage getShipInfo(String shipNo){
-        System.out.println("hello");
         ShipMessage shipMessage=menuService.getShipMessageByNo(shipNo);
         return shipMessage;
+    }
+    @RequestMapping("/getMenuType")
+    public FMenuType getMenuType(String shipNo,Integer menuTypeId){
+        FMenuType fMenuType = menuService.getMenuTypeByNoAndId(shipNo,menuTypeId);
+        return fMenuType;
     }
 
 }

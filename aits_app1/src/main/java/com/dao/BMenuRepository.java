@@ -10,4 +10,5 @@ import java.util.List;
  */
 public interface BMenuRepository  extends JpaRepository<BMenu,Long>{
     List<BMenu> findByBShipNo(String bShipNo);
+    BMenu  findByBMenuId(String menuId);
 }
