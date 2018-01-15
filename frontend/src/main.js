@@ -20,7 +20,7 @@ import '../plugins/slimScroll/jquery.slimscroll.min.js'
 import '../plugins/fastclick/fastclick.js'
 // AdminLTE App
 import '../assets/js/app.min.js'
-// AdminLTE for demo purposes
+// AdminLTE for oriDemo purposes
 import '../assets/js/demo.js'
 
 // socketjs.min.js

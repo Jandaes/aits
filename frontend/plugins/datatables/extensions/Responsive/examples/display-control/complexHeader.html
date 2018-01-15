@@ -15,7 +15,7 @@
 	th {
 		position: relative;
 		min-height: 41px;
-	} 
+	}
 	span {
 		display: block;
 		position: absolute;
@@ -37,10 +37,10 @@
 
 
 $(document).ready(function() {
-	// jQuery update a column title from the demo table to contain a long description
+	// jQuery update a column title from the oriDemo table to contain a long description
 	// You would not need to do this in your own code.
 	$('#example thead tr:eq(0) th:eq(2)').html("This is a really long column title!");
-	
+
 	// Wrap the colspan'ing header cells with a span so they can be positioned
 	// absolutely - filling the available space, and no more.
 	$('#example thead th[colspan]').wrapInner( '<span/>' ).append( '&nbsp;' );
@@ -572,21 +572,22 @@ $(document).ready(function() {
 
 			<div class="tabs">
 				<div class="js">
-					<p>The Javascript shown below is used to initialise the table shown in this example:</p><code class="multiline language-js">$(document).ready(function() {
-	// jQuery update a column title from the demo table to contain a long description
-	// You would not need to do this in your own code.
-	$('#example thead tr:eq(0) th:eq(2)').html(&quot;This is a really long column title!&quot;);
-	
-	// Wrap the colspan'ing header cells with a span so they can be positioned
-	// absolutely - filling the available space, and no more.
-	$('#example thead th[colspan]').wrapInner( '&lt;span/&gt;' ).append( '&amp;nbsp;' );
+					<p>The Javascript shown below is used to initialise the table shown in this example:</p><code class="multiline language-js">$(document).ready(function()
+          {
+          // jQuery update a column title from the oriDemo table to contain a long description
+          // You would not need to do this in your own com.code.
+          $('#example thead tr:eq(0) th:eq(2)').html(&quot;This is a really long column title!&quot;);
 
-	// Standard initialisation
-	$('#example').DataTable( {
-		responsive: true,
-		paging: false
-	} );
-} );</code>
+          // Wrap the colspan'ing header cells with a span so they can be positioned
+          // absolutely - filling the available space, and no more.
+          $('#example thead th[colspan]').wrapInner( '&lt;span/&gt;' ).append( '&amp;nbsp;' );
+
+          // Standard initialisation
+          $('#example').DataTable( {
+          responsive: true,
+          paging: false
+          } );
+          } );</code>
 
 					<p>In addition to the above code, the following Javascript library files are loaded for use in this example:</p>
 
@@ -607,7 +608,7 @@ $(document).ready(function() {
 						additional CSS used is shown below:</p><code class="multiline language-css">th {
 		position: relative;
 		min-height: 41px;
-	} 
+	}
 	span {
 		display: block;
 		position: absolute;
