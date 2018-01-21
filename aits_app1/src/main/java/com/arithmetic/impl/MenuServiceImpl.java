@@ -13,6 +13,7 @@ import com.model.ShipMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -53,9 +54,10 @@ public class MenuServiceImpl implements MenuService {
         }
 
         shipMessage.setFMenuTypes(fMenuTypes);
+        shipMessage.setPhone(shipInfo.getPhone());
         shipMessage.setAddress(shipInfo.getAddress());
         shipMessage.setIcoPath(shipInfo.getIcoPath());
-        shipMessage.setShipName(shipInfo.getShipName());
+        shipMessage.setShipName("测试编码："+shipInfo.getShipName());
         shipMessage.setShowImgPath(shipInfo.getShowImgPath());
         shipMessage.setShipNo(shipInfo.getShipNo());
         return shipMessage;
@@ -78,9 +80,5 @@ public class MenuServiceImpl implements MenuService {
         fMenuType.setMenuList(bMenus);
         return fMenuType;
     }
-
-
-
-
 
 }

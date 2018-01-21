@@ -27,9 +27,17 @@ public class BMenu {
      */
     private String bMenuName;
     /**
+     * 菜品图片
+     */
+    private String bMenuPic;
+    /**
      * 菜品价格
      */
     private Double bPrice;
+    /**
+     * 商品数量
+     */
+    private int bnum=0;
     /**
      * 菜品折扣后价格
      */

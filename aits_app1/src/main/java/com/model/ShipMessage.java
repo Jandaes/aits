@@ -28,6 +28,12 @@ public class ShipMessage {
      * 店铺地址
      */
     private String address;
+
+    /**
+     * 商家电话
+     */
+    private String phone;
+
     /**
      * 店家logo(提供一个自动截取图片的插件)
      */
