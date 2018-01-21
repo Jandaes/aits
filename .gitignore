@@ -1,4 +1,4 @@
-# 项目不受版本控制
+﻿# 项目不受版本控制
 aits.iml
 .idea
 minions.iml
@@ -41,4 +41,7 @@ backend/target/
 
 # logs不受控制
 logs
+aits_app1/target/*
+node_modules/*
+aits_app1/aits_app1.iml
 
